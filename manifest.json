@@ -1,0 +1,13 @@
+{
+ “manifest_version”: 1,
+ “name”: “Panther Epidemic”,
+ “description”: “Create some citations”,
+ “version”: “1”,
+ “author”: “Liz Parker”,
+"browser_action": {
+   "default_icon": "tab-icon.png",
+   “default_title”: “Have a good day”
+ },
+“browser_action”: {
+  “default_popup”: “popup.html”,
+ },
