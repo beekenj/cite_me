@@ -1,0 +1,110 @@
+<!-- 
+Author - Liz Parker & Jack Beeken
+Date - 02/25/19
+Class - Software Development Methods and Tools
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+ 	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+ 	<title>Citation form</title>
+ 	<link rel='icon' href='../resources/img/favicon.ico' type='image/x-icon'/>
+ 	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">  
+	<link href="../resources/css/my_style.css" rel="stylesheet">
+ </head>
+ <body>
+ <div class="container">
+ 	<h1>Citation Station</h1>
+ 	<table cellpadding="5">
+ 		<tr>
+	 		<td>
+				<label class="standard_label_style"><strong>Source Type</strong></label>
+			</td>
+			<td>
+				<label class="standard_label_style"><strong>Citation Style</strong></label>
+		 	</td>
+		</tr>
+		<tr>
+			<td>
+				<select>
+			  		<option value="Book">Book</option>
+			  		<option value="Webpage">Webpage</option>
+			  		<option value="Journal">Journal</option>
+			  		<option value="Magazine">Magazine</option>
+			  		<option value="Newspaper">Newspaper</option>
+				</select>
+			</td>
+			<td>
+				<select>
+			  		<option value="MLA">MLA</option>
+			  		<option value="APA">APA</option>
+			  		<option value="Chicago">Chicago</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+ 	<br>
+ 	<div>
+ 		<label class="standard_label_style"><strong>Author Information</strong></label>
+ 		<div class="form-group row">
+	 		<label class="col-form-label col-sm-2" for="first">First Name: </label>
+	 	    	<input type="text" class="form-control col-sm-4" name="first" id="first"  placeholder="Enter First Name">
+ 	    </div>
+ 	    <br>
+ 	    <div class="form-group row">
+	 		<label class="col-form-label col-sm-2" for="last">Last Name: </label>
+	 	    	<input type="text" class="form-control col-sm-4" name="last" id="last"  placeholder="Enter Last Name">
+ 	    </div>
+ 	</div>
+ 	<br>
+ 	<div>
+ 		<label class="standard_label_style"><strong>Article Information</strong></label>
+ 		<div class="form-group row">
+	 		<label class="col-form-label col-sm-2" for="article_title">Article Title: </label>
+	 	    	<input type="text" class="form-control col-sm-4" name="article_title" id="article_title"  placeholder="Enter Article Title">
+ 	    </div>
+ 		<div class="form-group row" id="website_input">
+	 		<label class="col-form-label col-sm-2" for="website_title">Website Title: </label>
+	 	    	<input type="text" class="form-control col-sm-4" name="website_title" id="website_title"  placeholder="Enter Website Title">
+ 	    </div>
+ 	    <div class="form-group row" id="journal_input">
+	 		<label class="col-form-label col-sm-2" for="journal_name">Journal Name: </label>
+	 	    	<input type="text" class="form-control col-sm-4" name="journal_name" id="journal_name"  placeholder="Enter Journal Name">
+ 	    </div>
+ 	    <div class="form-group row" id ="magazine_input">
+	 		<label class="col-form-label col-sm-2" for="magazine_title">Magazine Title: </label>
+	 	    	<input type="text" class="form-control col-sm-4" name="magazine_title" id="magazine_title"  placeholder="Enter Magazine Title">
+ 	    </div>
+ 	    <div class="form-group row" id="newspaper_input">
+	 		<label class="col-form-label col-sm-2" for="newspaper_name">Newspaper Name: </label>
+	 	    	<input type="text" class="form-control col-sm-4" name="newspaper_name" id="newspaper_name"  placeholder="Enter Newspaper Name">
+ 	    </div>
+ 	</div>
+ 	<br>
+ 	<div>
+ 		<label class="standard_label_style"><strong>Publication Information</strong></label>
+ 		<form class = "row">
+ 			<label class="col-form-label col-sm-2">Publication Date: </label>
+ 			<input type="date" id="publication_date">
+ 		</form>
+ 		<br>
+ 		<div class="form-group row" id="publisher">
+	 		<label class="col-form-label col-sm-2" for="publisher">Publisher: </label>
+	 	    	<input type="text" class="form-control col-sm-6" name="publisher" id="publisher"  placeholder="Enter Publisher">
+ 	    </div>
+ 	</div>
+ 	<br>
+ 	<div>
+ 		<label class="standard_label_style"><strong>Additional Information</strong></label>
+ 	</div>
+ </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  <script src="./resources/js/my_scripts.js"></script>
+ </body>
+</html>
