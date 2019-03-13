@@ -1,0 +1,100 @@
+<!--
+	Matt Lay
+	March 12, 2019
+	Software Dev Methods and tools
+-->
+
+
+
+<!DOCTYPE html>
+<html lang= "en">
+
+	 <head>
+	 	<title> The Registration </title>
+	 	<meta charset= "utf-8">
+ 		<title>Form</title>
+ 		<meta name= "viewport" content="width=device-width, initial-scale=1">
+
+
+ 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	</head>
+
+		<body>
+
+		<div class="p-3 mb-2 bg-dark text-danger">
+			<h1>Registration</h1>
+		</div>
+
+		<br>
+		<br>
+
+		<form action="/action_page.php">
+  			<div class="form-group row">
+    			<label for="email" class="col-sm-2 col-form-label" >Email address: </label>
+    			<div class= "col-xs-2">
+    			<input type="email" class="form-control" id="email">
+    		</div>
+
+  			
+  			</div>
+  			<div class="form-group row">
+    			<label for="pwd" class="col-sm-2 col-form-label">Password:</label>
+    			<div class ="col-xs-2">
+    			<input type="password" class="form-control" id="pwd">
+  			</div>
+  		</div>
+  			
+  			<div class="form-group row">
+  				<label for="sel1" class ="col-sm-2 col-form-label">Security Question :</label>
+  				<div class= "col-xs-2">
+  				<select class="form-control" id="sel1">
+    			<option>Bears, Beets, Battlestar Galactica.</option>
+    			<option>What is the worst Star Wars Movie?</option>
+    			<option>What is the meaning of life?</option>
+  				</select>
+  			</div>
+			</div>
+			<div class= "form-group row">
+				<div class= "col-xs-2">
+			<input type="Security Question"class="offset-sm-9 col-sm-10" class="form-control" id="Security Question" placeholder="Security Answer">
+
+			</div>
+		</div>
+
+
+		<div class= "container">
+		<div class= "form-group">
+		<button type= "button" class="btn btn-success btn-sm" class="offset-sm-9"> Press me to Submit </button>
+
+</div>
+	</div>
+		<div class="container">
+		<div class= "form-group">
+		<button type= "button" class="btn btn-danger btn sm"> Don't press me </button>
+
+
+
+
+
+
+
+		</form>
+
+
+
+
+		
+
+
+
+
+
+		</body>
+		</html>
+
