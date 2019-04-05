@@ -354,3 +354,7 @@ function changeForm(){
 		}
 	}
 }
+
+document.getElementById("type").onchange = changeForm;
+document.getElementById("style").onchange = changeForm;
+
