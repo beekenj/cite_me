@@ -358,3 +358,16 @@ function changeForm(){
 document.getElementById("type").onchange = changeForm;
 document.getElementById("style").onchange = changeForm;
 
+function addAuthorDisp(){
+	if (document.getElementById("author2").style.display == "none"){
+		document.getElementById("author2").style.display = "block";
+		document.getElementById("authorLabel").style.display = "block";
+	} else if (document.getElementById("author3").style.display == "none"){
+		document.getElementById("author3").style.display = "block";
+	} else {
+		alert("You cannot add more than three authors");
+	}
+}
+
+document.getElementById("addAuthor").onclick = addAuthorDisp;
+

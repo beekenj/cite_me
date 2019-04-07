@@ -1,11 +1,19 @@
 <!-- 
-Author - Liz Parker & Jack Beeken
-Date - 02/25/19
+Author - Panther Epidemic
+Date - 04/05/19
 Class - Software Development Methods and Tools
 -->
 
 <!DOCTYPE html>
 <html lang="en">
+ <style>
+ 	.addAuthor {
+	  background-color: white;
+	  color: black;
+	  border: 1px solid #555555;
+	  border-radius: 4px;
+	}
+ </style>
  <head>
  	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -50,14 +58,40 @@ Class - Software Development Methods and Tools
  	<br>
  	<div>
  		<label class="standard_label_style"><strong>Author Information</strong></label>
- 		<div class="form-group row">
-	 		<label class="col-form-label col-sm-2" for="first">First Name: </label>
-	 	    	<input type="text" class="form-control col-sm-4" name="first" id="first"  placeholder="Enter First Name">
- 	    </div>
- 	    <div class="form-group row">
-	 		<label class="col-form-label col-sm-2" for="last">Last Name: </label>
-	 	    	<input type="text" class="form-control col-sm-4" name="last" id="last"  placeholder="Enter Last Name">
- 	    </div>
+ 		<div id = "author">
+ 			<label id = "authorLabel" class="standard_label_style" style = "display:none;"><u>First Author</u></label>
+	 		<div class="form-group row">
+		 		<label class="col-form-label col-sm-2" for="first">First Name: </label>
+		 	    	<input type="text" class="form-control col-sm-4" name="first" id="first"  placeholder="Enter First Name">
+	 	    </div>
+	 	    <div class="form-group row">
+		 		<label class="col-form-label col-sm-2" for="last">Last Name: </label>
+		 	    	<input type="text" class="form-control col-sm-4" name="last" id="last"  placeholder="Enter Last Name">
+	 	    </div>
+	 	</div>
+ 	    <div id = "author2" style = "display:none;">
+ 	    	<label class="standard_label_style"><u>Second Author</u></label>
+	 		<div class="form-group row">
+		 		<label class="col-form-label col-sm-2" for="first2">First Name: </label>
+		 	    	<input type="text" class="form-control col-sm-4" name="first2" id="first2"  placeholder="Enter First Name">
+	 	    </div>
+	 	    <div class="form-group row">
+		 		<label class="col-form-label col-sm-2" for="last2">Last Name: </label>
+		 	    	<input type="text" class="form-control col-sm-4" name="last2" id="last2"  placeholder="Enter Last Name">
+	 	    </div>
+	 	</div>
+	 	<div id = "author3" style = "display:none;">
+ 	    	<label class="standard_label_style"><u>Third Author</u></label>
+	 		<div class="form-group row">
+		 		<label class="col-form-label col-sm-2" for="first3">First Name: </label>
+		 	    	<input type="text" class="form-control col-sm-4" name="first3" id="first3"  placeholder="Enter First Name">
+	 	    </div>
+	 	    <div class="form-group row">
+		 		<label class="col-form-label col-sm-2" for="last3">Last Name: </label>
+		 	    	<input type="text" class="form-control col-sm-4" name="last3" id="last3"  placeholder="Enter Last Name">
+	 	    </div>
+	 	</div>
+	 	<button type = "button" class = "addAuthor" id = "addAuthor">Add Another Author</button>
  	</div>
  	<br>
  	<div>
