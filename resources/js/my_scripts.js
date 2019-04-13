@@ -1,5 +1,4 @@
 function changeForm(){
-	//do nuthin
 	var type = document.getElementById("type").value;
 	var style = document.getElementById("style").value;
 	if (type == "Book"){
@@ -370,4 +369,84 @@ function addAuthorDisp(){
 }
 
 document.getElementById("addAuthor").onclick = addAuthorDisp;
+
+function submit(){
+	//send info in form fields to database
+	//call createCitation
+	//reformat html to display created citation
+}
+
+function createCitation(){
+	var type = document.getElementById("type").innerHTML;
+	var style = document.getElementById("style").innerHTML;
+	//MLA
+	if (style === "MLA"){
+		//Book
+		if (type === "Book"){
+
+		}
+		//Webpage
+		else if (type === "Webpage"){
+			
+		}
+		//Journal
+		else if (type === "Journal"){
+			
+		}
+		//Magazine
+		else if (type === "Magazine"){
+			
+		}
+		//Newspaper
+		else if (type === "Newspaper"){
+			
+		}
+	}
+	//Chicago
+	else if (style === "Chicago"){
+		//Book
+		if (type === "Book"){
+
+		}
+		//Webpage
+		else if (type === "Webpage"){
+			
+		}
+		//Journal
+		else if (type === "Journal"){
+			
+		}
+		//Magazine
+		else if (type === "Magazine"){
+			
+		}
+		//Newspaper
+		else if (type === "Newspaper"){
+			
+		}
+	}
+	//APA
+	else if (style === "APA"){
+		//Book
+		if (type === "Book"){
+
+		}
+		//Webpage
+		else if (type === "Webpage"){
+			
+		}
+		//Journal
+		else if (type === "Journal"){
+			
+		}
+		//Magazine
+		else if (type === "Magazine"){
+			
+		}
+		//Newspaper
+		else if (type === "Newspaper"){
+			
+		}
+	}
+}
 
