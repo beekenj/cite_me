@@ -1,5 +1,5 @@
 <!--
-	Matt Lay
+	Matt Lay & Jenn Riley
 	March 12, 2019
 	Software Dev Methods and tools
 -->
@@ -10,7 +10,7 @@
 <html lang= "en">
 
 	 <head>
-	 	<title> The Registration </title>
+	 	<title> Registration Page </title>
 	 	<meta charset= "utf-8">
  		<title>Form</title>
  		<meta name= "viewport" content="width=device-width, initial-scale=1">
@@ -35,66 +35,55 @@
 		<br>
 
 		<form action="/action_page.php">
-  			<div class="form-group row">
-    			<label for="email" class="col-sm-2 col-form-label" >Email address: </label>
-    			<div class= "col-xs-2">
-    			<input type="email" class="form-control" id="email">
-    		</div>
-
-  			
-  			</div>
-  			<div class="form-group row">
-    			<label for="pwd" class="col-sm-2 col-form-label">Password:</label>
-    			<div class ="col-xs-2">
-    			<input type="password" class="form-control" id="pwd">
-  			</div>
-  		</div>
   			
   			<div class="form-group row">
-  				<label for="sel1" class ="col-sm-2 col-form-label">Security Question :</label>
-  				<div class= "col-xs-2">
-  				<select class="form-control" id="sel1">
-    			<option>Bears, Beets, Battlestar Galactica.</option>
-    			<option>What is the worst Star Wars Movie?</option>
-    			<option>What is the meaning of life?</option>
-  				</select>
-  			</div>
-			</div>
-			<div class= "form-group row">
-				<div class= "col-xs-2">
-			<input type="Security Question"class="offset-sm-9 col-sm-10" class="form-control" id="Security Question" placeholder="Security Answer">
+		 		<label class="col-form-label col-sm-2" for="firstName">First Name: </label>
+		 	    	<input type="text" class="form-control col-sm-4" name="firstName" id="firstName"  placeholder="Enter First Name">
+	 	    </div>
 
-			</div>
-		</div>
+  			<div class="form-group row">
+		 		<label class="col-form-label col-sm-2" for="lastName">Last Name: </label>
+		 	    	<input type="text" class="form-control col-sm-4" name="lastName" id="lastName"  placeholder="Enter Last Name">
+	 	    </div>
+		
+		
+			<div class="form-group row">
+		 		<label class="col-form-label col-sm-2" for="email">Email: </label>
+		 	    	<input type="text" class="form-control col-sm-4" name="email" id="email"  placeholder="Email used as log-in">
+	 	    </div>
+		
+		
+			<div class="form-group row">
+		 		<label class="col-form-label col-sm-2" for="password">Password: </label>
+		 	    	<input type="text" class="form-control col-sm-4" name="password" id="password"  placeholder="Password">
+	 	    </div>
+				
+  			<div class="form-group row">
+		 		<label class="col-form-label col-sm-2" for="confPass">Confirm Password: </label>
+		 	    	<input type="text" class="form-control col-sm-4" name="confPass" id="confPass"  placeholder="Confirm Password">
+	 	    </div>
+			
+			<div class="form-group row">
+		 		<label class="col-form-label col-sm-2" for="security1">Security Question: </label>
+		 	    	<input type="text" class="form-control col-sm-4" name="security1" id="security1"  placeholder="What is your favorite hobby?">
+	 	    </div>
 
+	 	    <div class="form-group row">
+		 		<label class="col-form-label col-sm-2" for="security2">Security Question: </label>
+		 	    	<input type="text" class="form-control col-sm-4" name="security2" id="security2"  placeholder="What is the meaning of life?">
+	 	    </div>
+		
 
 		<div class= "container">
 		<div class= "form-group">
-		<button type= "button" class="btn btn-success btn-sm" class="offset-sm-9"> Press me to Submit </button>
+		<button type= "button" class="btn btn-success btn-sm" class="offset-sm-9"> Submit </button>
 
-</div>
-	</div>
-		<div class="container">
-		<div class= "form-group">
-		<button type= "button" class="btn btn-danger btn sm"> Don't press me </button>
-
-
-
-
+		</div>
 
 
 
 		</form>
 
-
-
-
-		
-
-
-
-
-
-		</body>
-		</html>
+	</body>
+</html>
 
