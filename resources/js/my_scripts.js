@@ -370,35 +370,148 @@ function addAuthorDisp(){
 
 document.getElementById("addAuthor").onclick = addAuthorDisp;
 
-function submit(){
-	//send info in form fields to database
-	//call createCitation
-	//reformat html to display created citation
+function authorInjMLA(){
+	//author last, first + .
+	var inj = "";
+	var a1last = QUERY;
+	var a1first = QUERY;
+	var a2last = QUERY;
+	var a2first = QUERY;
+	var a3last = QUERY;
+	var a3first = QUERY;
+	if (a1last != undefined && a1first != undefined){
+		if (a2last == undefined && a2first == undefined){
+			inj += a1last + ", " + a1first + ". ";
+		} else if (a3last == undefined && a3first == undefined){
+			inj += a1last + ", " + a1first + " and " + a2first + " " + a2last;
+		} else {
+			inj += a1last + ", " + a1first + ", et al. ";
+		}
+	}
+	return inj;
 }
 
 function createCitation(){
-	var type = document.getElementById("type").innerHTML;
-	var style = document.getElementById("style").innerHTML;
+	var type = document.getElementById("type").value;
+	var style = document.getElementById("style").value;
+	var inj = "";
 	//MLA
-	if (style === "MLA"){
+	if (style == "MLA"){
 		//Book
-		if (type === "Book"){
-
+		if (type == "Book"){
+			//author last, first + .
+			inj += authorInjMLA();
+			//title ITALICIZED + .
+			var tit = QUERY;
+			if (tit != undefined){
+				inj += "<i>" + tit + ". </i>";
+			}
+			//city of publication + :
+			var city = QUERY;
+			if (tit != undefined){
+				inj +=  city + ": ";
+			}
+			//publisher + ,
+			var pub = QUERY;
+			if (pub != undefined){
+				inj +=  pub + ", ";
+			}
+			//year published + ,
+			var year = QUERY;
+			if (year != undefined){
+				inj +=  year + ", ";
+			}
+			//"pp. " + page numbers + .
+			var pgs = QUERY;
+			if (pgs != undefined){
+				inj +=  "pp. " + pgs + ". ";
+			}
+			// + "Print."
+			inj += "Print."
 		}
 		//Webpage
-		else if (type === "Webpage"){
-			
+		else if (type == "Webpage"){
+			//author last, first + .
+			inj += authorInjMLA();
+			//" + article title + ." 
+			var tit = QUERY;
+			if (tit != undefined){
+				inj += '"' + tit + '." ';
+			}
+			//website title ITALICIZED + ,
+			var webTit = QUERY;
+			if (webTit != undefined){
+				inj += "<i>" + webTit + "</i>, ";
+			}
+			//publisher + ,
+			var pub = QUERY;
+			if (pub != undefined){
+				inj +=  pub + ", ";
+			}
+			// day month year of publication + ,
+			//FORMAT THIS
+			var date = QUERY;
+			if (date != undefined){
+				inj +=  date + ", ";
+			}
+			//URL + .
+			var url = QUERY;
+			if (url != undefined){
+				inj +=  url + ".";
+			}
 		}
 		//Journal
 		else if (type === "Journal"){
+			//author last, first + .
+			inj += authorInjMLA();
+			//" + article title + ." 
+			var tit = QUERY;
+			if (tit != undefined){
+				inj += '"' + tit + '." ';
+			}
+			//Journal title ITALICIZED
+			var jTit = QUERY;
+			if (jTit != undefined){
+				inj += "<i>" + jTit + "</i> ";
+			}
+			//volume + . 
+			var vol = QUERY;
+			if (vol != undefined){
+				inj += vol + ". ";
+			}
+			//issue
+			var issue = QUERY;
+			if (issue != undefined){
+				inj += issue + " ";
+			}
+			// ( + year published + ):
+			var year = QUERY; //FORMAT THIS
+			if (year != undefined){
+				inj += "(" + year + "): ";
+			}
+			//pages + .
+			var pgs = QUERY;
+			if (pgs != undefined){
+				inj += pgs + ". ";
+			}
+			// + "Print."
+			inj += "Print.";
 			
 		}
 		//Magazine
 		else if (type === "Magazine"){
-			
+			//author last, first + .
+			inj += authorInjMLA();
+			// " + article title + ."
+			// magazine title ITALICIZED + .
+			// Date Month Year Published + :
+			//pages + .
+
 		}
 		//Newspaper
 		else if (type === "Newspaper"){
+			//author last, first + .
+			inj += authorInjMLA();
 			
 		}
 	}
@@ -448,5 +561,21 @@ function createCitation(){
 			
 		}
 	}
+	return inj;
 }
+
+function sub(){
+	//send info in form fields to database
+	//DEAL WITH MULTIPLE AUTHORS ISSUES
+	//call createCitation
+	//reformat html to display created citation
+
+	//test code below
+	var citation = "test"; //createCitation();
+	var inj = document.createElement("P");
+	inj.innerHTML = citation;
+	document.body.appendChild(inj);
+}
+
+document.getElementById("citeme").onclick = sub;
 
