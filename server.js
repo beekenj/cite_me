@@ -7,6 +7,9 @@
 ***********************/
 var express = require('express'); //Ensure our express framework has been added
 var app = express();
+var speakeasy =  require('speakeasy'); //Ensure our QR can be imaged
+var passport = require('passport'); //allows for passport to be used
+var QRCode = require('qrcode'); //allows for the creation of 
 var bodyParser = require('body-parser'); //Ensure our body-parser tool has been added
 app.use(bodyParser.json());              // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
@@ -41,4 +44,10 @@ app.get('/registeration', function(req, res) {
   res.render('pages/register',{
     my_title:"Registration Page"
   });
+});
+
+app.get(/index', function(req, res) {
+    res.render('pages/index', {
+        my_title: "Login Page"
+        });
 });
