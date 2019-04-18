@@ -1,3 +1,11 @@
+<!-- 
+Name - Panther Epidemic
+Date - 04/17/2019
+Class - Software Development Methods and Tools
+Author- Jennifer Palese
+I did use a source to get this far in the two factor authenticator: https://www.twilio.com/docs/authy
+-->
+
 var crypto = require('crypto'); //cryptographic algorithms
 var mongoose = require('mongoose'); //object data modeling
 var User = mongoose.model('User'); //creates a user model
