@@ -26,6 +26,7 @@ Author- Matt Lay & Jenn Riley
  	<!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">  
 	<link href="./resources/css/my_style.css" rel="stylesheet">
+	<script src="a.js"></script>
  </head>
  <body onLoad="changeForm()">
  <div class="container">
@@ -45,25 +46,21 @@ Author- Matt Lay & Jenn Riley
 		<script type="text/javascript">
 		
 		$dbconn = pg_connect("host=ec2-54-225-129-101.compute-1.amazonaws.com port=5432 dbname=d1pjf7j45lf5pj user=brlletohmrgqrv password=4d8bbac5a3ba0b0666f61c1949c16c07ea72c6980a05eba8d413e288dfa7ffa7");
-
 		$fName = pg_escape_string(_POST['firstName']);
 		$lName = pg_escape_string(_POST['lastName']);
 		$email = pg_escape_string(_POST['email']);
 		$confEmail = pg_escape_string(_POST['confEmail']);
+		$confEmail = pg_escape_string(_POST['phone']);
 		$password = pg_escape_string(_POST['password']);
 		$confPass = pg_escape_string(_POST['confPass']);
 		$security1 = pg_escape_string(_POST['security1']);
 		$security2 = pg_escape_string(_POST['security2']);
-
-
 		if(!empty ($fName)){
 		return 0;
 		}
-
 		if(!empty ($lName)){
 		return 0;
 		}
-
 		if(!empty ($email)){
 		return 0;
 		}
@@ -88,27 +85,21 @@ Author- Matt Lay & Jenn Riley
 		return 0;
 		}
 				
-
 		if((email != confEmail){
 			return "Error, your emails do not match."
 		}
-
 		if((password != confPass){
 			return "Error, your passwords do not match."
 		}
-
-		$sql = "INSERT INTO userreg (email, password, firstname, lastname, security1, security2) values ('".$email."', '".$password."', '".$fName."', '".$lName."', '".$security1."', '".$security2."')";
+		$sql = "INSERT INTO userreg (email, password, firstname, lastname, phone, security1, security2) values ('".$email."', '".$password."', '".$fName."', '".$lName."', '".$security1."', '".$security2."')";
 		pq_query($dbconn, $sql);	
 		</script>
-
-
 		<form action="/action_page.php">
   			
   			<div class="form-group row">
 		 		<label class="col-form-label col-sm-2" for="firstName">First Name: </label>
 		 	    	<input type="text" class="form-control col-sm-4" name="firstName" id="firstName"  placeholder="Enter First Name">
 	 	    </div>
-
   			<div class="form-group row">
 		 		<label class="col-form-label col-sm-2" for="lastName">Last Name: </label>
 		 	    	<input type="text" class="form-control col-sm-4" name="lastName" id="lastName"  placeholder="Enter Last Name">
@@ -119,12 +110,15 @@ Author- Matt Lay & Jenn Riley
 		 		<label class="col-form-label col-sm-2" for="email">Email: </label>
 		 	    	<input type="text" class="form-control col-sm-4" name="email" id="email"  placeholder="Email used as log-in">
 	 	    </div>
-
 	 	    <div class="form-group row">
 		 		<label class="col-form-label col-sm-2" for="confEmail">Confirm Email: </label>
 		 	    	<input type="text" class="form-control col-sm-4" name="confEmail" id="confEmail"  placeholder="Confirm Email">
 	 	    </div>
-		
+			
+			<div class="form-group row">
+		 		<label class="col-form-label col-sm-2" for="email">Phone Number: </label>
+		 	    	<input type="tel" class="form-control col-sm-4" name="phone" id="phone"  placeholder="Phone number that can be texted a code">
+	 	    </div>
 		
 			<div class="form-group row">
 		 		<label class="col-form-label col-sm-2" for="password">Password: </label>
@@ -140,38 +134,17 @@ Author- Matt Lay & Jenn Riley
 		 		<label class="col-form-label col-sm-2" for="security1">Security Question: </label>
 		 	    	<input type="text" class="form-control col-sm-6" name="security1" id="security1"  placeholder="What is your favorite hobby?">
 	 	    </div>
-
 	 	    <div class="form-group row">
 		 		<label class="col-form-label col-sm-2" for="security2">Security Question: </label>
 		 	    	<input type="text" class="form-control col-sm-6" name="security2" id="security2"  placeholder="What is the meaning of life?">
 	 	    </div>
 		
-
 		<div class= "container">
 		<div class= "form-group">
-		<button type= "button" class="btn btn-success btn-sm" class="offset-sm-9"> Submit </button>
-
+		<button type= "button" class="btn btn-success btn-sm" class="offset-sm-9" onclick = "exports.register"> Submit </button>
 </div>
-
-
-
-
-
-
-
-
-
 		</form>
-
-
-
-
 		
-
-
-
-
-
 		</body>
 		</html>
 
