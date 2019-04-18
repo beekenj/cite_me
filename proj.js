@@ -3,6 +3,7 @@ Name - Panther Epidemic
 Date - 04/10/2019
 Class - Software Development Methods and Tools
 Author- Jennifer Palese
+I did use a source to get this far in the two factor authenticator: https://www.npmjs.com/package/speakeasy
 -->
 
 var secret = speakeasy.generateSecret({length: 20}); //gives a secret key of 32 characters
