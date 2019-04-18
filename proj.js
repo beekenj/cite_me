@@ -1,3 +1,10 @@
+<!-- 
+Name - Panther Epidemic
+Date - 04/05/19
+Class - Software Development Methods and Tools
+Author- Jennifer Palese
+-->
+
 var secret = speakeasy.generateSecret({length: 20}); //gives a secret key of 32 characters
 
 function Display()
