@@ -27,14 +27,26 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
   password: 4d8bbac5a3ba0b0666f61c1949c16c07ea72c6980a05eba8d413e288dfa7ffa7
 **********************/
 
+const dbConfig = {
+        host: 'ec2-54-225-129-101.compute-1.amazonaws.com',
+        port: 5432,
+        database: 'd1pjf7j45lf5pj',
+        user: 'brlletohmrgqrv',
+        password: '4d8bbac5a3ba0b0666f61c1949c16c07ea72c6980a05eba8d413e288dfa7ffa7'
+};
 
 
 //Create Database Connection
 const pgp = require('pg-promise')();
 
-const dbConfig = process.env.DATABASE_URL;
-
-var db = pgp(dbConfig);
+const db_remote_Config = process.env.DATABASE_URL;
+var db = ""
+if(db_remote_Config)
+{ 
+  db = pgp(db_remote_Config);
+}else{
+  db = pgp(dbConfig)
+}
 
 
 /*
@@ -105,15 +117,16 @@ app.get('/register', function(req, res) {
 
 // Submit registration page
 app.post('/register', function(req, res) {
-  console.log(req.query.fullName);
+  console.log(req.body);
+  console.log(req.body.firstName);
 
-  var firstName = req.query.firstName;
-  var lastName = req.query.LastName;
-  var email = req.query.email;
-  var phone = req.query.phone;
-  var password = req.query.password;
-  var security1 = req.query.security1;
-  var security2 = req.query.security2;
+  var firstName = req.body.firstName;
+  var lastName = req.body.LastName;
+  var email = req.body.email;
+  var phone = req.body.phone;
+  var password = req.body.password;
+  var security1 = req.body.security1;
+  var security2 = req.body.security2;
   
 
 //Insert into Database
@@ -121,8 +134,22 @@ app.post('/register', function(req, res) {
               password + "','" + firstName + "','" + lastName + "','" + security1 + "','" + security2 + "','" + phone + "');";
    
 
-// OR: return error
-
+// Return error
+db.task('get-everything', task => {
+        return task.batch([
+            task.any(insert_statement),
+        ]);
+    })
+    /*
+    .catch(error => {
+        // display error message in case an error
+            request.flash('error', err);
+            response.render('pages/registration', {
+                title: 'Registration',
+                data: '',
+            })
+    });
+*/
 //test phrase
   res.send('hello world');
 });
@@ -178,10 +205,10 @@ app.get('/home', function(req, res) {
 });
 */
 
-var listener = app.listen(process.env.PORT)
-/*
+var listener = app.listen(process.env.PORT|3000
+
 , function(){
     console.log('Listening on port ' + listener.address().port); //Listening on port 
 
 });
- */
+ 
