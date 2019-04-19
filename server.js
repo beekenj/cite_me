@@ -133,19 +133,17 @@ app.post('/citationForm', function(req, res) {
   var type = req.body.type;
   var style = req.body.style;
   
-
 //Insert Citations into Database
 
 //To DO create citation insert statement
-  var insert_statement = "INSERT INTO citation(email, password, firstname, lastname, security1, security2, phone) VALUES('" + email + "','" + 
-              password + "','" + firstName + "','" + lastName + "','" + security1 + "','" + security2 + "','" + phone + "');";
+  var insert_statement;
    
 
 // OR: return error
 
 
 // home page 
-app.get('/player_info', function(req, res) {
+app.get('/home', function(req, res) {
 	var query = 'select id, name from football_players;'
 	db.any(query)
         .then(function (rows) {
