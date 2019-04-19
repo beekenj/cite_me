@@ -105,15 +105,15 @@ app.get('/register', function(req, res) {
 
 // Submit registration page
 app.post('/register', function(req, res) {
-  console.log(req.body.fullName);
+  console.log(req.query.fullName);
 
-  var firstName = req.body.firstName;
-  var lastName = req.body.LastName;
-  var email = req.body.email;
-  var phone = req.body.phone;
-  var password = req.body.password;
-  var security1 = req.body.security1;
-  var security2 = req.body.security2;
+  var firstName = req.query.firstName;
+  var lastName = req.query.LastName;
+  var email = req.query.email;
+  var phone = req.query.phone;
+  var password = req.query.password;
+  var security1 = req.query.security1;
+  var security2 = req.query.security2;
   
 
 //Insert into Database
