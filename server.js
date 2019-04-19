@@ -117,7 +117,7 @@ app.post('/register', function(req, res) {
 });
 
 
-/*
+
 //CitationForm
 app.get('/citationForm', function(req, res) {
   res.render('pages/citationForm',{
@@ -125,7 +125,9 @@ app.get('/citationForm', function(req, res) {
   });
 });
 
-// registration page form submit
+/*
+
+// Citation form submit Function
 app.post('/citationForm', function(req, res) {
   console.log(req.body.fullName);
 
@@ -140,6 +142,7 @@ app.post('/citationForm', function(req, res) {
    
 
 // OR: return error
+
 
 
 // home page 
