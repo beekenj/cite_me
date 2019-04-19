@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 **********************/
 
 
-/*
+
 //Create Database Connection
 const pgp = require('pg-promise')();
 
@@ -36,8 +36,8 @@ const dbConfig = process.env.DATABASE_URL;
 
 var db = pgp(dbConfig);
 
-*/
 
+/*
 var connectionString = "postgres://brlletohmrgqrv:4d8bbac5a3ba0b0666f61c1949c16c07ea72c6980a05eba8d413e288dfa7ffa7@ec2-54-225-129-101.compute-1.amazonaws.com:*5432/d1pjf7j45lf5pj"
 
 pg.connect(connectionString, function(err, client, done) {
@@ -48,7 +48,7 @@ pg.connect(connectionString, function(err, client, done) {
    });
 });
 
-
+*/
 
 
 // set the view engine to ejs
