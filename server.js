@@ -117,7 +117,7 @@ app.post('/register', function(req, res) {
 });
 
 
-
+/*
 //CitationForm
 app.get('/citationForm', function(req, res) {
   res.render('pages/citationForm',{
@@ -144,33 +144,24 @@ app.post('/citationForm', function(req, res) {
 
 // home page 
 app.get('/home', function(req, res) {
-	var query = 'select id, name from football_players;'
 	db.any(query)
         .then(function (rows) {
             // render views/store/list.ejs template file
-            res.render('pages/player_info',{
-				my_title: "Football Player Information",
-				players: rows,
-				player_info: '',
-                games_played: ''
-			})
+            res.render('pages/home',{
+				    my_title: "CiteMe HomePage",
+			      })
 
         })
         .catch(function (err) {
             // display error message in case an error
             request.flash('error', err);
-            response.render('pages/player_info', {
-                title: 'Football Player Information',
-                players: '',
-                player_info: '',
-                games_played: ''
+            response.render('pages/home', {
+                title: 'CiteMe HomePage',
             })
         })
 	
 });
-
-
-
+*/
 
 var listener = app.listen(process.env.PORT, function(){
     console.log('Listening on port ' + listener.address().port); //Listening on port 
