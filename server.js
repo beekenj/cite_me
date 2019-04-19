@@ -125,12 +125,13 @@ app.get('/citationForm', function(req, res) {
   });
 });
 
-/*
+
 
 // Citation form submit Function
 app.post('/citationForm', function(req, res) {
   console.log(req.body.fullName);
 
+/*
   //TODO Create Form Variables
   var type = req.body.type;
   var style = req.body.style;
