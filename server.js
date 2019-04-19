@@ -21,13 +21,15 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 
 //Create Database Connection
-const pgp = require('pg-promise')(){
+const pgp = require('pg-promise')();
+/*
 const cn = 'postgres://brlletohmrgqrv:4d8bbac5a3ba0b0666f61c1949c16c07ea72c6980a05eba8d413e288dfa7ffa7@ec2-54-225-129-101.compute-1.amazonaws.com:5432/d1pjf7j45lf5pj';
 
 const db - pgn(cn);
 module.exports - db;
 
 }
+*/
 
 /**********************
   Database Connection information
@@ -39,10 +41,10 @@ module.exports - db;
 **********************/
 
 
-//const dbConfig = process.env.DATABASE_URL;
+const dbConfig = process.env.DATABASE_URL;
 
 
-//var db = pgp(dbConfig);
+var db = pgp(dbConfig);
 
 
 
