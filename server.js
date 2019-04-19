@@ -21,7 +21,13 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 
 //Create Database Connection
-var pgp = require('pg-promise')();
+const pgp = require('pg-promise')(){
+const cn = 'postgres://brlletohmrgqrv:4d8bbac5a3ba0b0666f61c1949c16c07ea72c6980a05eba8d413e288dfa7ffa7@ec2-54-225-129-101.compute-1.amazonaws.com:5432/d1pjf7j45lf5pj';
+
+const db - pgn(cn);
+module.exports - db;
+
+}
 
 /**********************
   Database Connection information
@@ -32,10 +38,11 @@ var pgp = require('pg-promise')();
   password: 4d8bbac5a3ba0b0666f61c1949c16c07ea72c6980a05eba8d413e288dfa7ffa7
 **********************/
 
-const dbConfig = process.env.DATABASE_URL;
+
+//const dbConfig = process.env.DATABASE_URL;
 
 
-var db = pgp(dbConfig);
+//var db = pgp(dbConfig);
 
 
 
@@ -82,24 +89,24 @@ app.get('/', function(req, res) {
 	});
 });
 
-// registration page 
+
+//REGISTRATION
+// load registration page 
 app.get('/register', function(req, res) {
 	res.render('pages/register',{
 		my_title:"Registration Page"
 	});
 });
 
-// registration page form submit
+// Submit registration page
 app.post('/register', function(req, res) {
   console.log(req.body.fullName);
 
   var firstName = req.body.firstName;
   var lastName = req.body.LastName;
   var email = req.body.email;
-  var confEmail = req.body.confEmail;
   var phone = req.body.phone;
   var password = req.body.password;
-  var confPass = req.body.confPass;
   var security1 = req.body.security1;
   var security2 = req.body.security2;
   
