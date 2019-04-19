@@ -1,11 +1,4 @@
 /***********************
-Name - Panther Epidemic
-Date - 04/17/2019
-Class - Software Development Methods and Tools
-Author- Jenn Riley
-***********************/
-
-/***********************
   Load Components!
 
   Express      - A Node.js Framework
@@ -19,293 +12,56 @@ app.use(bodyParser.json());              // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 //Create Database Connection
-var pgp = require('pg-promise')();
+const { Pool, Client } = require('pg')
+const connectionString = 'postgres://brlletohmrgqrv:4d8bbac5a3ba0b0666f61c1949c16c07ea72c6980a05eba8d413e288dfa7ffa7@ec2-54-225-129-101.compute-1.amazonaws.com:5432/d1pjf7j45lf5pj'
+
+const pool = new Pool({
+  connectionString: connectionString,
+})
+
+pool.query('SELECT NOW()', (err, res) => {
+  console.log(err, res)
+  pool.end()
+})
+
+const client = new Client({
+  connectionString: connectionString,
+})
+client.connect()
+
+client.query('SELECT NOW()', (err, res) => {
+  console.log(err, res)
+  client.end()
+})
 
 /**********************
-  Database Connection information
-  host: This defines the ip address of the server hosting our database.  We'll be using localhost and run our database on our local machine (i.e. can't be access via the Internet)
-  port: This defines what port we can expect to communicate to our database.  We'll use 5432 to talk with PostgreSQL
-  database: This is the name of our specific database.  From our previous lab, we created the football_db database, which holds our football data tables
-  user: This should be left as postgres, the default user account created when PostgreSQL was installed
-  password: This the password for accessing the database.  You'll need to set a password USING THE PSQL TERMINAL THIS IS NOT A PASSWORD FOR POSTGRES USER ACCOUNT IN LINUX!
+  Database Connection information: All set by Heroku
+  host: ec2-54-225-129-101.compute-1.amazonaws.com
+  port: 5432
+  database: d1pjf7j45lf5pj
+  user: brlletohmrgqrv
+  password: 4d8bbac5a3ba0b0666f61c1949c16c07ea72c6980a05eba8d413e288dfa7ffa7
+  URI: postgres://brlletohmrgqrv:4d8bbac5a3ba0b0666f61c1949c16c07ea72c6980a05eba8d413e288dfa7ffa7@ec2-54-225-129-101.compute-1.amazonaws.com:5432/d1pjf7j45lf5pj
+
 **********************/
 
-const dbConfig = process.env.DATABASE_URL;
 
-var db = pgp(dbConfig);
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/'));//This line is necessary for us to use relative paths and access our resources directory
 
-
-
-/*********************************
- Below we'll add the get & post requests which will handle:
-   - Database access
-   - Parse parameters from get (URL) and post (data package)
-   - Render Views - This will decide where the user will go after the get/post request has been processed
-
- Web Page Requests:
-
-  Login Page:        Provided For your (can ignore this page)
-  Registration Page: Provided For your (can ignore this page)
-  Home Page:
-  		/home - get request (no parameters) 
-  				This route will make a single query to the favorite_colors table to retrieve all of the rows of colors
-  				This data will be passed to the home view (pages/home)
-
-
-  		/team_stats - get request (no parameters)
-  			This route will require no parameters.  It will require 3 postgres queries which will:
-  				1. Retrieve all of the football games in the Fall 2018 Season
-  				2. Count the number of winning games in the Fall 2018 Season
-  				3. Count the number of lossing games in the Fall 2018 Season
-  			The three query results will then be passed on to the team_stats view (pages/team_stats).
-  			The team_stats view will display all fo the football games for the season, show who won each game, 
-  			and show the total number of wins/losses for the season.
-
-  		/player_info - get request (no parameters)
-  			This route will handle a single query to the football_players table which will retrieve the id & name for all of the football players.
-  			Next it will pass this result to the player_info view (pages/player_info), which will use the ids & names to populate the select tag for a form 
-************************************/
-
-// login page 
-app.get('/', function(req, res) {
-	res.render('pages/login',{
-		local_css:"signin.css", 
-		my_title:"Login Page"
-	});
-});
-
-// registration page 
-app.get('/register', function(req, res) {
-	res.render('pages/register',{
-		my_title:"Registration Page"
-	});
-});
-
-// registration page form submit
-app.post('/register', function(req, res) {
-  console.log(req.body.fullName);
-
-  var firstName = req.body.firstName;
-  var lastName = req.body.LastName;
-  var email = req.body.email;
-  var confEmail = req.body.confEmail;
-  var phone = req.body.phone;
-  var password = req.body.password;
-  var confPass = req.body.confPass;
-  var security1 = req.body.security1;
-  var security2 = req.body.security2;
-  
-/*Validation
-Ignoring email and password validation for now, we don't really need it 
-*/
-
-
-//Insert into Database
-  var insert_statement = "INSERT INTO userreg(email, password, firstname, lastname, security1, security2, phone) VALUES('" + email + "','" + 
-              password + "','" + firstName + "','" + lastName + "','" + security1 + "','" + security2 + "','" + phone + "');";
-   
-
-// OR: return error
-
-
-  res.send('hello world');
-});
-
-// home page 
-app.get('/home', function(req, res) {
-	var query = 'select * from favorite_colors;';
-	db.any(query)
-        .then(function (rows) {
-            // render views/store/list.ejs template file
-            res.render('pages/home',{
-				my_title: "Home Page",
-				data: rows,
-				color: '',
-				color_msg: ''
-			})
-
-        })
-        .catch(function (err) {
-            // display error message in case an error
-            request.flash('error', err);
-            response.render('pages/home', {
-                title: 'Home Page',
-                data: '',
-                color: '',
-                color_msg: ''
-            })
-        })
-	
-});
-
-app.post('/home/pick_color', function(req, res) {
-	
-	var color_hex = req.body.color_hex;
-	var color_name = req.body.color_name;
-	var color_message = req.body.color_message;
-	var insert_statement = "INSERT INTO favorite_colors(hex_value, name, color_msg) VALUES('" + color_hex + "','" + 
-							color_name + "','" + color_message +"');";
-
-	var color_select = 'select * from favorite_colors;';
-	db.task('get-everything', task => {
-        return task.batch([
-            task.any(insert_statement),
-            task.any(color_select)
-        ]);
-    })
-    .then(info => {
-    	res.render('pages/home',{
-				my_title: "Home Page",
-				data: info[1],
-				color: color_hex,
-				color_msg: color_message
-			})
-    })
-    .catch(error => {
-        // display error message in case an error
-            request.flash('error', err);
-            response.render('pages/home', {
-                title: 'Home Page',
-                data: '',
-                color: '',
-                color_msg: ''
-            })
-    });
-	
-	
-});
-
-app.get('/home/pick_color', function(req, res) {
-	var color_choice = req.query.color_selection;
-	var color_options =  'select * from favorite_colors;';
-	var color_message = "select color_msg from favorite_colors where hex_value = '" + color_choice + "';"; 
-	 db.task('get-everything', task => {
-        return task.batch([
-            task.any(color_options),
-            task.any(color_message)
-        ]);
-    })
-    .then(data => {
-    	res.render('pages/home',{
-				my_title: "Home Page",
-				data: data[0],
-				color: color_choice,
-				color_msg: data[1][0].color_msg
-			})
-    })
-    .catch(error => {
-        // display error message in case an error
-            request.flash('error', err);
-            response.render('pages/home', {
-                title: 'Home Page',
-                data: '',
-                color: '',
-                color_msg: ''
-            })
-    });
-	
+// Homepage 
+app.get('/Homepage', function(req, res) {
+  res.render('pages/home',{
+    my_title:"Homepage"
+  });
 });
 
 
-// Football Games Page
-app.get('/team_stats', function(req, res) {
-	var list_games = 'select * from football_games;';
-	var count_losing = 'select count(*) from football_games where visitor_score > home_score;';
-	var count_winning = 'select count(*) from football_games where visitor_score < home_score;';
-
-  db.task('get-everything', task => {
-        return task.batch([
-            task.any(list_games),
-            task.any(count_losing),
-            task.any(count_winning)
-        ]);
-    })
-    .then(data => {
-    	res.render('pages/team_stats',{
-				my_title: "Football Games",
-				games: data[0],
-				total_losses: data[1][0].count,
-				total_wins: data[2][0].count
-			})
-    })
-    .catch(error => {
-        // display error message in case an error
-            request.flash('error', err);
-            response.render('pages/team_stats', {
-                title: 'Footbal Games',
-                data: '',
-                total_wins: 'Error',
-                total_losses: 'Error'
-            })
-    });
-
-});
-
-// Player's Information Page
-app.get('/player_info', function(req, res) {
-	var query = 'select id, name from football_players;'
-	db.any(query)
-        .then(function (rows) {
-            // render views/store/list.ejs template file
-            res.render('pages/player_info',{
-				my_title: "Football Player Information",
-				players: rows,
-				player_info: '',
-                games_played: ''
-			})
-
-        })
-        .catch(function (err) {
-            // display error message in case an error
-            request.flash('error', err);
-            response.render('pages/player_info', {
-                title: 'Football Player Information',
-                players: '',
-                player_info: '',
-                games_played: ''
-            })
-        })
-	
-});
-
-app.get('/player_info/get_player', function(req, res) {
-	var player_id = req.query.player_choice;
-	var list_players = 'select id, name from football_players;';
-	var chosen_player = 'select * from football_players where id=' + player_id + ';';
-	var games_played = 'select count(*) from football_games where ' + player_id + '=any(players);';
-
-	 db.task('get-everything', task => {
-        return task.batch([
-            task.any(list_players),
-            task.any(chosen_player),
-            task.any(games_played)
-        ]);
-    })
-    .then(data => {
-    	console.log(data[1])
-    	res.render('pages/player_info',{
-				my_title: "Football Games",
-				players: data[0],
-				player_info: data[1][0],
-				games_played: data[2][0].count
-			})
-    })
-    .catch(error => {
-        // display error message in case an error
-            request.flash('error', err);
-            response.render('pages/player_info', {
-                title: 'Football Player Information',
-                players: '',
-                player_info: '',
-                games_played: ''
-            })
-    });
-	
-});
-var listener = app.listen(process.env.PORT, function(){
-    console.log('Listening on port ' + listener.address().port); //Listening on port 
+// Registration page 
+app.get('/registeration', function(req, res) {
+  res.render('pages/registration',{
+    my_title:"Registration Page"
+  });
 });
