@@ -116,7 +116,6 @@ app.post('/register', function(req, res) {
   var security2 = req.body.security2;
   
 
-
 //Insert into Database
   var insert_statement = "INSERT INTO userreg(email, password, firstname, lastname, security1, security2, phone) VALUES('" + email + "','" + 
               password + "','" + firstName + "','" + lastName + "','" + security1 + "','" + security2 + "','" + phone + "');";
@@ -124,7 +123,7 @@ app.post('/register', function(req, res) {
 
 // OR: return error
 
-
+//test phrase
   res.send('hello world');
 });
 
@@ -179,6 +178,10 @@ app.get('/home', function(req, res) {
 });
 */
 
-var listener = app.listen(process.env.PORT, function(){
+var listener = app.listen(process.env.PORT)
+/*
+, function(){
     console.log('Listening on port ' + listener.address().port); //Listening on port 
+
 });
+ */
