@@ -83,17 +83,19 @@ app.use(express.static(__dirname + '/'));//This line is necessary for us to use 
   Registration Page: 
       /registration - post request
         User Registration Form, updates userreg table in postgres
-  Home Page:
-  		/home - get request 
-          Should have a table of all of the users citations
-          1. Retrieve all of the citations that the user has created.
-          2. Need to figure out if they are going to be rewriteable.
-  Citation Form:
+  
+Citation Form:
       /citationForm - post request
       1. User fills in formfields
       2. Uploads to database
       3. Creates a new citation in the database
 
+  Home Page:
+  		/home - get request 
+          Should have a table of all of the users citations
+          1. Retrieve all of the citations that the user has created.
+          2. Need to figure out if they are going to be rewriteable.
+  
 ************************************/
 
 // login page 
@@ -125,9 +127,6 @@ app.post('/register', function(req, res) {
   var security1 = req.body.security1;
   var security2 = req.body.security2;
   
-/*Validation
-Ignoring email and password validation for now, we don't really need it 
-*/
 
 
 //Insert into Database
@@ -140,6 +139,34 @@ Ignoring email and password validation for now, we don't really need it
 
   res.send('hello world');
 });
+
+
+
+//CitationForm
+app.get('/citationForm', function(req, res) {
+  res.render('pages/citationForm',{
+    my_title:"Citation Station"
+  });
+});
+
+// registration page form submit
+app.post('/citationForm', function(req, res) {
+  console.log(req.body.fullName);
+
+  //TODO Create Form Variables
+  var type = req.body.type;
+  var style = req.body.style;
+  
+
+//Insert Citations into Database
+
+//To DO create citation insert statement
+  var insert_statement = "INSERT INTO citation(email, password, firstname, lastname, security1, security2, phone) VALUES('" + email + "','" + 
+              password + "','" + firstName + "','" + lastName + "','" + security1 + "','" + security2 + "','" + phone + "');";
+   
+
+// OR: return error
+
 
 // home page 
 app.get('/player_info', function(req, res) {
@@ -169,30 +196,7 @@ app.get('/player_info', function(req, res) {
 });
 
 
-//CitationForm
-app.get('/citationForm', function(req, res) {
-  res.render('pages/citationForm',{
-    my_title:"Citation Station"
-  });
-});
 
-// registration page form submit
-app.post('/citationForm', function(req, res) {
-  console.log(req.body.fullName);
-
-  //TODO Create Form Variables
-  var type = req.body.type;
-  var style = req.body.style;
-  
-
-//Insert Citations into Database
-
-//To DO create citation insert statement
-  var insert_statement = "INSERT INTO citation(email, password, firstname, lastname, security1, security2, phone) VALUES('" + email + "','" + 
-              password + "','" + firstName + "','" + lastName + "','" + security1 + "','" + security2 + "','" + phone + "');";
-   
-
-// OR: return error
 
 var listener = app.listen(process.env.PORT, function(){
     console.log('Listening on port ' + listener.address().port); //Listening on port 
