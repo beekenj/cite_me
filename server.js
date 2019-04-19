@@ -19,7 +19,31 @@ app.use(bodyParser.json());              // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 
+//Create Database Connection
+const { Pool, Client } = require('pg')
+const connectionString = 'postgres://brlletohmrgqrv:4d8bbac5a3ba0b0666f61c1949c16c07ea72c6980a05eba8d413e288dfa7ffa7@ec2-54-225-129-101.compute-1.amazonaws.com:5432/d1pjf7j45lf5pj'
 
+const pool = new Pool({
+  connectionString: connectionString,
+})
+
+pool.query('SELECT NOW()', (err, res) => {
+  console.log(err, res)
+  pool.end()
+})
+
+const client = new Client({
+  connectionString: connectionString,
+})
+client.connect()
+
+client.query('SELECT NOW()', (err, res) => {
+  console.log(err, res)
+  client.end()
+})
+
+
+/*
 //Create Database Connection
 var pgp = require('pg-promise')();
 
@@ -30,14 +54,14 @@ var pgp = require('pg-promise')();
   database: d1pjf7j45lf5pj
   user: brlletohmrgqrv
   password: 4d8bbac5a3ba0b0666f61c1949c16c07ea72c6980a05eba8d413e288dfa7ffa7
-**********************/
+
 
 const dbConfig = process.env.DATABASE_URL;
 
 
 var db = pgp(dbConfig);
 
-
+*/
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -53,23 +77,22 @@ app.use(express.static(__dirname + '/'));//This line is necessary for us to use 
 
  Web Page Requests:
 
-  Login Page:        
+  Login Page: 
+    Simple User login that validates from the user reg page
+    Creates a user instance.       
   Registration Page: 
       /registration - post request
         User Registration Form, updates userreg table in postgres
   Home Page:
   		/home - get request 
-  				Should have a table of all of the users citations
-
-
-  		/team_stats - get request (no parameters)
-  			This route will require no parameters.  It will require 3 postgres queries which will:
-  				1. Retrieve all of the football games in the Fall 2018 Season
-  				2. Count the number of winning games in the Fall 2018 Season
-  				3. Count the number of lossing games in the Fall 2018 Season
-  			The three query results will then be passed on to the team_stats view (pages/team_stats).
-  			The team_stats view will display all fo the football games for the season, show who won each game, 
-  			and show the total number of wins/losses for the season.
+          Should have a table of all of the users citations
+          1. Retrieve all of the citations that the user has created.
+          2. Need to figure out if they are going to be rewriteable.
+  Citation Form:
+      /citationForm - post request
+      1. User fills in formfields
+      2. Uploads to database
+      3. Creates a new citation in the database
 
 ************************************/
 
@@ -119,34 +142,6 @@ Ignoring email and password validation for now, we don't really need it
 });
 
 // home page 
-app.get('/home', function(req, res) {
-	var query = 'select * from favorite_colors;';
-	db.any(query)
-        .then(function (rows) {
-            // render views/store/list.ejs template file
-            res.render('pages/home',{
-				my_title: "Home Page",
-				data: rows,
-				color: '',
-				color_msg: ''
-			})
-
-        })
-        .catch(function (err) {
-            // display error message in case an error
-            request.flash('error', err);
-            response.render('pages/home', {
-                title: 'Home Page',
-                data: '',
-                color: '',
-                color_msg: ''
-            })
-        })
-	
-});
-
-
-// Player's Information Page
 app.get('/player_info', function(req, res) {
 	var query = 'select id, name from football_players;'
 	db.any(query)
@@ -173,6 +168,31 @@ app.get('/player_info', function(req, res) {
 	
 });
 
+
+//CitationForm
+app.get('/citationForm', function(req, res) {
+  res.render('pages/citationForm',{
+    my_title:"Citation Station"
+  });
+});
+
+// registration page form submit
+app.post('/citationForm', function(req, res) {
+  console.log(req.body.fullName);
+
+  //TODO Create Form Variables
+  var type = req.body.type;
+  var style = req.body.style;
+  
+
+//Insert Citations into Database
+
+//To DO create citation insert statement
+  var insert_statement = "INSERT INTO citation(email, password, firstname, lastname, security1, security2, phone) VALUES('" + email + "','" + 
+              password + "','" + firstName + "','" + lastName + "','" + security1 + "','" + security2 + "','" + phone + "');";
+   
+
+// OR: return error
 
 var listener = app.listen(process.env.PORT, function(){
     console.log('Listening on port ' + listener.address().port); //Listening on port 
