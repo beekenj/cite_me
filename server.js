@@ -49,20 +49,6 @@ if(db_remote_Config)
 }
 
 
-/*
-var connectionString = "postgres://brlletohmrgqrv:4d8bbac5a3ba0b0666f61c1949c16c07ea72c6980a05eba8d413e288dfa7ffa7@ec2-54-225-129-101.compute-1.amazonaws.com:*5432/d1pjf7j45lf5pj"
-
-pg.connect(connectionString, function(err, client, done) {
-   client.query('SELECT * FROM userreg', function(err, result) {
-      done();
-      if(err) return console.error(err);
-      console.log(result.rows);
-   });
-});
-
-*/
-
-
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/'));//This line is necessary for us to use relative paths and access our resources directory
