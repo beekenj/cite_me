@@ -131,13 +131,13 @@ app.post('/register', function(req, res) {
 //Insert into Database
   var insert_statement = "INSERT INTO userreg(email, password, firstname, lastname, security1, security2, phone) VALUES('" + email + "','" + 
               password + "','" + firstName + "','" + lastName + "','" + security1 + "','" + security2 + "','" + phone + "');";
-   
+  /* 
   db.task('get-everything', task => {
         return task.batch([
             task.any(insert_statement)
         ]);
     })
-/*
+
   .then(info=> {
     res.render('pages/register', {
       my_title: "Registration Page",
