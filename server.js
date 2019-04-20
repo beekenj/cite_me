@@ -137,7 +137,7 @@ app.post('/register', function(req, res) {
             task.any(insert_statement)
         ]);
     })
-
+/*
   .then(info=> {
     res.render('pages/register', {
       my_title: "Registration Page",
@@ -154,7 +154,7 @@ app.post('/register', function(req, res) {
                 data: '',
             })
     })
-
+*/
 //test phrase
   res.send('hello world');
 });
