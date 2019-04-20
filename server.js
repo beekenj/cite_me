@@ -13,10 +13,19 @@ Author- Jenn Riley
   Pg-Promise   - A database tool to help use connect to our PostgreSQL database
 ***********************/
 var express = require('express'); //Ensure our express framework has been added
-var app = express();
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+var flash = require('connect-flash');
 var bodyParser = require('body-parser'); //Ensure our body-parser tool has been added
+
+var app = express();
+
+app.use(cookieParser('secret'));
+app.use(session({cookie: { maxAge: 60000 }}));
+app.use(flash()); // setup the flash for flashing info/errors to client
 app.use(bodyParser.json());              // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+
 
 /**********************
   Database Connection information
@@ -29,6 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 const dbConfig = {
         host: 'ec2-54-225-129-101.compute-1.amazonaws.com',
+        ssl: true,
         port: 5432,
         database: 'd1pjf7j45lf5pj',
         user: 'brlletohmrgqrv',
@@ -39,7 +49,7 @@ const dbConfig = {
 //Create Database Connection
 const pgp = require('pg-promise')();
 
-const db_remote_Config = process.env.DATABASE_URL;
+const db_remote_Config = undefined;// = process.env.DATABASE_URL;
 var db = "";
 if(db_remote_Config)
 { 
@@ -104,45 +114,41 @@ app.get('/register', function(req, res) {
 // Submit Registration Info
 app.post('/register', function(req, res) {
   console.log(req.body);
-  console.log(req.body.firstName);
 
   var firstName = req.body.firstName;
-  var lastName = req.body.LastName;
+  var lastName = req.body.lastName;
   var email = req.body.email;
   var phone = req.body.phone;
   var password = req.body.password;
   var security1 = req.body.security1;
   var security2 = req.body.security2;
   
-//Insert into Database
+  //Insert into Database
   var insert_statement = "INSERT INTO userreg(email, password, firstname, lastname, security1, security2, phone) VALUES('" + email + "','" + 
               password + "','" + firstName + "','" + lastName + "','" + security1 + "','" + security2 + "','" + phone + "');";
-  /* 
-  db.task('get-everything', task => {
+  
+  console.log("query: %s", insert_statement);
+
+  db.task('write-everything', task => {
         return task.batch([
             task.any(insert_statement)
         ]);
     })
-
-  .then(info=> {
-    res.render('pages/register', {
-      my_title: "Registration Page",
-      data: info[0],
+    .then(info => {
+      console.log("POST /register\n%s", info);
+      res.render('pages/home', {
+        my_title: "Registration Success"
+      })
     })
-  })
-
-// Return error
-    .catch(error => {
-        // display error message in case an error
-            request.flash('error', err);
-            response.render('pages/register', {
-                title: 'Registration Page',
-                data: '',
-            })
-    })
-*/
-//test phrase
-  res.send('hello world');
+    // Return error
+    .catch(err => {
+      // display error message in case an error
+      console.log("POST /register\n%s", err);
+      req.flash('error', err);
+      res.render('pages/home', {
+          my_title: 'Registration Failure',
+      })
+    });
 });
 
 
