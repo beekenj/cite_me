@@ -115,7 +115,7 @@ app.get('/register', function(req, res) {
 	});
 });
 
-// Submit registration page
+// Submit Registration Info
 app.post('/register', function(req, res) {
   console.log(req.body);
   console.log(req.body.firstName);
@@ -128,32 +128,36 @@ app.post('/register', function(req, res) {
   var security1 = req.body.security1;
   var security2 = req.body.security2;
   
-
 //Insert into Database
   var insert_statement = "INSERT INTO userreg(email, password, firstname, lastname, security1, security2, phone) VALUES('" + email + "','" + 
               password + "','" + firstName + "','" + lastName + "','" + security1 + "','" + security2 + "','" + phone + "');";
    
-
-// Return error
-db.task('get-everything', task => {
+  db.task('get-everything', task => {
         return task.batch([
-            task.any(insert_statement),
+            task.any(insert_statement)
         ]);
     })
-    /*
+
+  .then(info=> {
+    res.render('pages/register', {
+      my_title: "Registration Page",
+      data: info[0],
+    })
+  })
+
+// Return error
     .catch(error => {
         // display error message in case an error
             request.flash('error', err);
-            response.render('pages/registration', {
-                title: 'Registration',
+            response.render('pages/register', {
+                title: 'Registration Page',
                 data: '',
             })
-    });
-*/
+    })
+
 //test phrase
   res.send('hello world');
 });
-
 
 
 //CitationForm
