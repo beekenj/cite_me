@@ -40,7 +40,7 @@ const dbConfig = {
 const pgp = require('pg-promise')();
 
 const db_remote_Config = process.env.DATABASE_URL;
-var db = ""
+var db = "";
 if(db_remote_Config)
 { 
   db = pgp(db_remote_Config);
