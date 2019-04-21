@@ -201,7 +201,7 @@ app.get('/home', function(req, res) {
 });
 */
 
-var listener = app.listen(process.env.PORT|3000
+var listener = app.listen(process.env.PORT
 
 , function(){
     console.log('Listening on port ' + listener.address().port); //Listening on port 
