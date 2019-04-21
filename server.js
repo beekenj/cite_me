@@ -196,33 +196,30 @@ db.task('write-everything', task => {
       // display error message in case an error
       console.log("POST /citationForm\n%s", err);
       req.flash('error', err);
-      res.render('pages/CitationForm', {
+      res.render('pages/citationForm', {
           my_title: 'Citation Submission Failure',
       })
     });
 });
 
 
+///////////////////////////////////////////////HOMEPAGE///////////////////////////////////////
 
-// home page 
+// Load Home Page 
 app.get('/home', function(req, res) {
-	db.any(query)
-        .then(function (rows) {
-            // render views/store/list.ejs template file
-            res.render('pages/home',{
-				    my_title: "CiteMe HomePage",
-			      })
-
-        })
-        .catch(function (err) {
-            // display error message in case an error
-            request.flash('error', err);
-            response.render('pages/home', {
-                title: 'CiteMe HomePage',
-            })
-        })
-	
+    res.render('pages/home',{
+    my_title: "CiteMe HomePage",
+    });
 });
+ // Return error
+  .catch(err => {
+    // display error message in case an error
+    console.log("POST /home\n%s", err);
+    req.flash('error', err);
+    res.render('pages/home', {
+        my_title: 'Home Page Failure',
+    })
+  });
 
 
 var listener = app.listen(process.env.PORT
@@ -231,4 +228,9 @@ var listener = app.listen(process.env.PORT
     console.log('Listening on port ' + listener.address().port); //Listening on port 
 
 });
- 
+
+
+////////////////////////////////////////////////CITATIONS STATION//////////////////////////////////
+
+//To Do Code for Users Citation Station
+
