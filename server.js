@@ -161,45 +161,39 @@ app.get('/citationForm', function(req, res) {
   });
 });
 
-
-
 // Submit Citation Information
 app.post('/citationForm', function(req, res) {
   console.log(req.body);
 
-
-  //TODO Create Form Variables
   var type = req.body.type;
   var style = req.body.style;
   var citString = req.body.citString;
   
 //Insert Citations into Database
-
-//To DO create citation insert statement
   var cit_insert_statement = "INSERT INTO usercitations(citationtype, citationstyle, html_string) VALUES('" + type + "','" + 
               style + "','" + citString + "');"
   console.log("query: %s", cit_insert_statement);
 
-db.task('write-everything', task => {
-        return task.batch([
-            task.any(cit_insert_statement)
-        ]);
-    })
-    .then(info => {
-      console.log("POST /citationForm\n%s", info);
-      res.render('pages/citationForm', {
-        my_title: "Citation Submission Success"
+  db.task('write-everything', task => {
+      return task.batch([
+          task.any(cit_insert_statement)
+      ]);
+  })
+      .then(info => {
+        console.log("POST /citationForm\n%s", info);
+        res.render('pages/citationForm', {
+          my_title: "Citation Submission Success"
+        })
       })
-    })
-    // Return error
-    .catch(err => {
-      // display error message in case an error
-      console.log("POST /citationForm\n%s", err);
-      req.flash('error', err);
-      res.render('pages/citationForm', {
-          my_title: 'Citation Submission Failure',
-      })
-    });
+      // Return error
+      .catch(err => {
+        // display error message in case an error
+        console.log("POST /citationForm\n%s", err);
+        req.flash('error', err);
+        res.render('pages/citationForm', {
+            my_title: 'Citation Submission Failure',
+        })
+      });
 });
 
 
@@ -211,6 +205,7 @@ app.get('/home', function(req, res) {
     my_title: "CiteMe HomePage",
     });
 });
+/*
  // Return error
   .catch(err => {
     // display error message in case an error
@@ -221,7 +216,7 @@ app.get('/home', function(req, res) {
     })
   });
 
-
+*/
 var listener = app.listen(process.env.PORT
 
 , function(){
