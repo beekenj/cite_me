@@ -176,7 +176,7 @@ app.post('/citationForm', function(req, res) {
 //Insert Citations into Database
 
 //To DO create citation insert statement
-  var cit_insert_statement = "INSERT INTO usercitations(citationtype, citationstyle, html_string) VALUESVALUES('" + type + "','" + 
+  var cit_insert_statement = "INSERT INTO usercitations(citationtype, citationstyle, html_string) VALUES('" + type + "','" + 
               style + "','" + citString + "');"
   console.log("query: %s", cit_insert_statement);
 
