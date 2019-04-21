@@ -103,7 +103,8 @@ app.get('/', function(req, res) {
 });
 
 
-//REGISTRATION
+///////////////////////////////////////REGISTRATION///////////////////////////////////
+
 // load registration page 
 app.get('/register', function(req, res) {
 	res.render('pages/register',{
@@ -151,32 +152,55 @@ app.post('/register', function(req, res) {
     });
 });
 
+////////////////////////////////////////////////CITATIONS//////////////////////////////////
 
-//CitationForm
+//Load CitationForm page
 app.get('/citationForm', function(req, res) {
   res.render('pages/citationForm',{
-    my_title:"Citation Station"
+    my_title:"Citation Page"
   });
 });
 
-/*
 
-// Citation form submit Function
+
+// Submit Citation Information
 app.post('/citationForm', function(req, res) {
-  console.log(req.body.fullName);
+  console.log(req.body);
 
 
   //TODO Create Form Variables
   var type = req.body.type;
   var style = req.body.style;
+  var citString = req.body.citString;
   
 //Insert Citations into Database
 
 //To DO create citation insert statement
-  var insert_statement;
-   
+  var cit_insert_statement = "INSERT INTO usercitations(citationtype, citationstyle, html_string) VALUESVALUES('" + type + "','" + 
+              style + "','" + citString + "');"
+  console.log("query: %s", cit_insert_statement);
 
-// OR: return error
+db.task('write-everything', task => {
+        return task.batch([
+            task.any(cit_insert_statement)
+        ]);
+    })
+    .then(info => {
+      console.log("POST /citationForm\n%s", info);
+      res.render('pages/citationForm', {
+        my_title: "Citation Submission Success"
+      })
+    })
+    // Return error
+    .catch(err => {
+      // display error message in case an error
+      console.log("POST /citationForm\n%s", err);
+      req.flash('error', err);
+      res.render('pages/CitationForm', {
+          my_title: 'Citation Submission Failure',
+      })
+    });
+});
 
 
 
@@ -199,7 +223,7 @@ app.get('/home', function(req, res) {
         })
 	
 });
-*/
+
 
 var listener = app.listen(process.env.PORT
 
