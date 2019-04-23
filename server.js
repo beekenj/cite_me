@@ -235,22 +235,13 @@ app.get('/home', function(req, res) {
         res.end();
         return;
     }
+    //If login works, takes the user to the homepage
     res.render('pages/home',{
         my_title: "CiteMe HomePage",
         });    
 });
-/*
- // Return error
-  .catch(err => {
-    // display error message in case an error
-    console.log("POST /home\n%s", err);
-    req.flash('error', err);
-    res.render('pages/home', {
-        my_title: 'Home Page Failure',
-    })
-  });
-*/
-var listener = app.listen(process.env.PORT|3000
+
+var listener = app.listen(process.env.PORT
 
 , function(){
     console.log('Listening on port ' + listener.address().port); //Listening on port 
