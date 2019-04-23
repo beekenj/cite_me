@@ -7,7 +7,6 @@ Author- Jenn Riley
 
 /***********************
   Load Components!
-
   Express      - A Node.js Framework
   Body-Parser  - A tool to help use parse the data in a post request
   Pg-Promise   - A database tool to help use connect to our PostgreSQL database
@@ -17,6 +16,7 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var flash = require('connect-flash');
 var bodyParser = require('body-parser'); //Ensure our body-parser tool has been added
+const util = require('util')
 
 var app = express();
 
@@ -29,20 +29,20 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 /**********************
   Database Connection information
-  host: ec2-54-225-129-101.compute-1.amazonaws.com
+  host: eec2-23-23-228-132.compute-1.amazonaws.com
   port: 5432;
-  database: d1pjf7j45lf5pj
-  user: brlletohmrgqrv
-  password: 4d8bbac5a3ba0b0666f61c1949c16c07ea72c6980a05eba8d413e288dfa7ffa7
+  database: d5ggadqvdve851
+  user: ujszzpvmmlrtzj
+  password: c0764c91547b893cad7711a918b6617c7965747943e11dc536480d82c2d1284d
 **********************/
 
 const dbConfig = {
-        host: 'ec2-54-225-129-101.compute-1.amazonaws.com',
+        host: 'ec2-23-23-228-132.compute-1.amazonaws.com',
         ssl: true,
         port: 5432,
-        database: 'd1pjf7j45lf5pj',
-        user: 'brlletohmrgqrv',
-        password: '4d8bbac5a3ba0b0666f61c1949c16c07ea72c6980a05eba8d413e288dfa7ffa7'
+        database: 'd5ggadqvdve851',
+        user: 'ujszzpvmmlrtzj',
+        password: 'c0764c91547b893cad7711a918b6617c7965747943e11dc536480d82c2d1284d'
 };
 
 
@@ -70,9 +70,7 @@ app.use(express.static(__dirname + '/'));//This line is necessary for us to use 
    - Database access
    - Parse parameters from get (URL) and post (data package)
    - Render Views - This will decide where the user will go after the get/post request has been processed
-
  Web Page Requests:
-
   Login Page: 
     Simple User login that validates from the user reg page
     Creates a user instance.       
@@ -85,7 +83,6 @@ Citation Form:
       1. User fills in formfields
       2. Uploads to database
       3. Creates a new citation in the database
-
   Home Page:
   		/home - get request 
           Should have a table of all of the users citations
@@ -96,12 +93,44 @@ Citation Form:
 
 // login page 
 app.get('/', function(req, res) {
-	res.render('pages/login',{
-		local_css:"signin.css", 
-		my_title:"Login Page"
-	});
+    console.log(req.session);
+    if (req.session.user) {
+        console.log(req.session.user);
+        res.redirect("/home");
+    } else {
+        res.render('pages/login', {
+            local_css:"signin.css", 
+            my_title:"Login Page"
+        });
+    }
 });
 
+app.post('/', function(req, res) {
+    console.log("POST /");
+    console.log(util.inspect(req.body));
+    
+    var login_email = req.body.email;
+    var login_password = req.body.password;
+    
+    db.any('SELECT user_id, email, password FROM userreg WHERE email = $1 AND password = $2', [login_email, login_password])
+    .then(info => {
+        if (info.length == 0) {
+            throw "User not found.";
+        }
+        console.log(util.inspect(info));
+        req.session.user = info;
+        //req.session.regenerate(function(err) {
+            // will have a new session here
+        //})
+        // Jump to the home page where the users citations are.
+        res.redirect('/home');
+        res.end();
+    })
+    .catch(error => {
+        res.status(500).send('Username or Password Incorrect'); //send out an error of username not being able to be found
+        console.log("Username or password incorrect: ", error); //throws an error in the console that you didn't log out
+    });
+});
 
 ///////////////////////////////////////REGISTRATION///////////////////////////////////
 
@@ -178,22 +207,22 @@ app.post('/citationForm', function(req, res) {
       return task.batch([
           task.any(cit_insert_statement)
       ]);
-  })
-      .then(info => {
+    })
+    .then(info => {
         console.log("POST /citationForm\n%s", info);
         res.render('pages/citationForm', {
-          my_title: "Citation Submission Success"
+            my_title: "Citation Submission Success"
         })
-      })
-      // Return error
-      .catch(err => {
+    })
+    // Return error
+    .catch(err => {
         // display error message in case an error
         console.log("POST /citationForm\n%s", err);
         req.flash('error', err);
         res.render('pages/citationForm', {
             my_title: 'Citation Submission Failure',
         })
-      });
+    });
 });
 
 
@@ -201,9 +230,14 @@ app.post('/citationForm', function(req, res) {
 
 // Load Home Page 
 app.get('/home', function(req, res) {
+    if (!req.session.user) {
+        res.redirect("/");
+        res.end();
+        return;
+    }
     res.render('pages/home',{
-    my_title: "CiteMe HomePage",
-    });
+        my_title: "CiteMe HomePage",
+        });    
 });
 /*
  // Return error
@@ -215,9 +249,8 @@ app.get('/home', function(req, res) {
         my_title: 'Home Page Failure',
     })
   });
-
 */
-var listener = app.listen(process.env.PORT
+var listener = app.listen(process.env.PORT|3000
 
 , function(){
     console.log('Listening on port ' + listener.address().port); //Listening on port 
@@ -228,4 +261,3 @@ var listener = app.listen(process.env.PORT
 ////////////////////////////////////////////////CITATIONS STATION//////////////////////////////////
 
 //To Do Code for Users Citation Station
-
