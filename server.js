@@ -185,7 +185,12 @@ app.post('/register', function(req, res) {
 
 //Load CitationForm page
 app.get('/citationForm', function(req, res) {
-  res.render('pages/citationForm',{
+    if (!req.session.user) {
+        res.redirect("/");
+        res.end();
+        return;
+    }
+    res.render('pages/citationForm',{
     my_title:"Citation Page"
   });
 });
@@ -193,22 +198,18 @@ app.get('/citationForm', function(req, res) {
 // Submit Citation Information
 app.post('/citationForm', function(req, res) {
   console.log(req.body);
-  var type = req.body.type;
-  var style = req.body.style;
+  console.log(util.inspect(req.session.user));
   var citeString = req.body.citeString;
   console.log("citeString = " + citeString);
-  /*
+  
   if (citeString == '') {
     res.status(500).send('Failed to provide a valid citation.');
     res.end();
     return;
   }
-  */
-  citeString = "testing citation";
   
   //Insert Citations into Database
-  var cit_insert_statement = "INSERT INTO usercitations(citationtype, citationstyle, html_string) VALUES('" + type + "','" + 
-              style + "','" + citeString + "');"
+  var cit_insert_statement = "INSERT INTO usercitations(user_id, html_string) VALUES('" + req.session.user.user_id + "','" + citeString + "');"
   console.log("query: %s", cit_insert_statement);
 
   db.task('write-everything', task => {
