@@ -1044,26 +1044,12 @@ function createCitation(){
 	}
 	return inj;
 }
-/*
-function submitForm(){
-	console.log('citeMe! was pressed');
-	document.getElementById("citString").value = 'hello world';//createCitation();
-}
-*/
 
 function submitForm()
 {
-   console.log('citeMe! was pressed');
-   var form = document.forms['myform'];
-   //form.action = 'citationForm';
-   var el = document.createElement("input");
-   el.type = "hidden";
-   el.name = "citString";
-   el.value = "";
-   form.appendChild(el);
-   form.submit();
+   document.getElementById("citeString").value = createCitation();
 }
 
-//document.getElementById("citeme").onsubmit = sub;
+document.getElementById("submitCite").onclick = submitForm;
 document.body.onload = changeForm;
 
