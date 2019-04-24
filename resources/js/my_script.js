@@ -461,30 +461,30 @@ function authorInjChi(){
 	return inj;
 }
 
-function month(var m){
+function month(m){
 	if (m == 0){
 		return "Jan. ";
-	} else (m == 1){
+	} else if (m == 1){
 		return "Feb. ";
-	} else (m == 2){
+	} else if (m == 2){
 		return "Mar. ";
-	} else (m == 3){
+	} else if (m == 3){
 		return "Apr. ";
-	} else (m == 4){
+	} else if (m == 4){
 		return "May ";
-	} else (m == 5){
+	} else if (m == 5){
 		return "Jun. ";
-	} else (m == 6){
+	} else if (m == 6){
 		return "Jul. ";
-	} else (m == 7){
+	} else if (m == 7){
 		return "Aug. ";
-	} else (m == 8){
+	} else if (m == 8){
 		return "Sept. ";
-	} else (m == 9){
+	} else if (m == 9){
 		return "Oct. ";
-	} else (m == 10){
+	} else if (m == 10){
 		return "Nov. ";
-	} else (m == 11){
+	} else if (m == 11){
 		return "Dec. ";
 	}
 }
@@ -1044,18 +1044,26 @@ function createCitation(){
 	}
 	return inj;
 }
+/*
+function submitForm(){
+	console.log('citeMe! was pressed');
+	document.getElementById("citString").value = 'hello world';//createCitation();
+}
+*/
 
-function sub(){
-	//reformat html to display created citation
-	//send citation to database
-
-	//test code below
-	var citation = createCitation();
-	var inj = document.createElement("P");
-	inj.innerHTML = citation;
-	document.body.appendChild(inj);
+function submitForm()
+{
+   console.log('citeMe! was pressed');
+   var form = document.forms['myform'];
+   //form.action = 'citationForm';
+   var el = document.createElement("input");
+   el.type = "hidden";
+   el.name = "citString";
+   el.value = "";
+   form.appendChild(el);
+   form.submit();
 }
 
-document.getElementById("citeme").onclick = sub;
+//document.getElementById("citeme").onsubmit = sub;
 document.body.onload = changeForm;
 
