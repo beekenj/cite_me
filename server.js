@@ -127,8 +127,7 @@ app.post('/', function(req, res) {
         res.end();
     })
     .catch(error => {
-        //res.status(500).send('Username or Password Incorrect'); //send out an error of username not being able to be found
-	alert("Username or Password Incorrect");
+        res.status(500).send('Username or Password Incorrect'); //send out an error of username not being able to be found
         console.log("Username or password incorrect: ", error); //throws an error in the console that you didn't log out
     });
 });
@@ -194,14 +193,22 @@ app.get('/citationForm', function(req, res) {
 // Submit Citation Information
 app.post('/citationForm', function(req, res) {
   console.log(req.body);
-
   var type = req.body.type;
   var style = req.body.style;
-  var citString = req.body.citString;
+  var citeString = req.body.citeString;
+  console.log("citeString = " + citeString);
+  /*
+  if (citeString == '') {
+    res.status(500).send('Failed to provide a valid citation.');
+    res.end();
+    return;
+  }
+  */
+  citeString = "testing citation";
   
-//Insert Citations into Database
+  //Insert Citations into Database
   var cit_insert_statement = "INSERT INTO usercitations(citationtype, citationstyle, html_string) VALUES('" + type + "','" + 
-              style + "','" + citString + "');"
+              style + "','" + citeString + "');"
   console.log("query: %s", cit_insert_statement);
 
   db.task('write-everything', task => {
