@@ -27,7 +27,7 @@ Author - Liz
  <div class="container">
  	<form class="form-citationForm" method="post">
 	 <h1>Cite Me!</h1>
-		<form action="/citationForm" method="post">
+		<form name="myform" action="/citationForm" method="post" onsubmit="submitForm()">
  	<table cellpadding="5">
  		<tr>
 	 		<td>
@@ -203,8 +203,6 @@ Author - Liz
 	 	    <form class="row">
 		 		<label class="col-form-label col-sm-2">Date Accessed: </label>
  				<input type="date" id="date_accessed" default = "">
-	</form>
-	</form>
 	 	    <br>
 	 	</div>
 	 	<div id="doi_input">
@@ -221,8 +219,10 @@ Author - Liz
 	 	</div>
  	</div>
  	<div>
- 		<button class="btn btn-lg btn-primary" type="submit" id="citeme">Cite Me!</button>
- 	</div>
+		<input type="submit" class="btn btn-primary btn-block" value="Cite Me!">
+	</div>
+	</form>
+</form>
  </div>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
