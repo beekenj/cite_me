@@ -127,7 +127,8 @@ app.post('/', function(req, res) {
         res.end();
     })
     .catch(error => {
-        res.status(500).send('Username or Password Incorrect'); //send out an error of username not being able to be found
+        //res.status(500).send('Username or Password Incorrect'); //send out an error of username not being able to be found
+	alert("Username or Password Incorrect");
         console.log("Username or password incorrect: ", error); //throws an error in the console that you didn't log out
     });
 });
