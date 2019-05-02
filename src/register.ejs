@@ -1,0 +1,110 @@
+<!-- 
+Name - Panther Epidemic
+Date - 04/18/2019
+Class - Software Development Methods and Tools
+Author- Jenn Riley
+-->
+
+<% include ../partials/header %>
+	
+	<style>
+      .bd-placeholder-img {
+        background-color: white;
+	  color: black;
+	  border: 1px solid #555555;
+	  border-radius: 4px;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+    </style>
+
+    <head>
+	 	<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <meta name="description" content="">
+	 	<title>Registration Page</title>
+	 	<link rel="shortcut icon" href="favicon.ico" >
+ 	
+ 	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">  
+	<link href="./resources/css/my_style.css" rel="stylesheet">
+	<script src="a.js"></script>
+ 	
+ 	</head>
+
+    <div class="row">
+			<div class="col-3">
+				<img class="rounded img-fluid" src="../resources/img/citeMeLogo.png" alt="citeMe Logo">
+			</div>
+	 <br>
+	<br>
+	<br>
+
+    <form class="form-register" method="post">
+	
+	  <h2 class="h3 mb-3 font-weight-normal">User Registration</h2>
+   <br>
+	<div class="container">
+		
+		<form action="/register" method="post">
+
+			<div class="form-group row">
+		 		<label class="col-form-label col-sm-5" for="firstName">First Name: </label>
+		 	    	<input type="text" class="form-control col-sm-7" name="firstName" id="firstName" required placeholder="Enter First Name">
+	 	    </div>
+
+  			<div class="form-group row">
+		 		<label class="col-form-label col-sm-5" for="lastName">Last Name: </label>
+		 	    	<input type="text" class="form-control col-sm-7" name="lastName" id="lastName" required placeholder="Enter Last Name">
+	 	    </div>
+		
+		
+			<div class="form-group row">
+		 		<label class="col-form-label col-sm-5" for="email">Email: </label>
+		 	    	<input type="text" class="form-control col-sm-7" name="email" id="email" required placeholder="Email used as log-in">
+	 	    </div>
+	 	    
+			
+			<div class="form-group row">
+		 		<label class="col-form-label col-sm-5" for="phone">Cell Number: </label>
+		 	    	<input type="tel" class="form-control col-sm-7" name="phone" id="phone" required placeholder="Will be texted a code">
+	 	    </div>
+		
+			<div class="form-group row">
+		 		<label class="col-form-label col-sm-5" for="password">Password: </label>
+		 	    	<input type="text" class="form-control col-sm-7" name="password" id="password" required placeholder="Password">  
+	 	    </div>
+  						
+			<div class="form-group row">
+		 		<label class="col-form-label col-sm-5" for="security1">Security Question: </label>
+		 	    	<input type="text" class="form-control col-sm-7" name="security1" id="security1" required placeholder="Favorite hobby?">
+	 	    </div>
+	 	    <div class="form-group row">
+		 		<label class="col-form-label col-sm-5" for="security2">Security Question: </label>
+		 	    	<input type="text" class="form-control col-sm-7" name="security2" id="security2" required placeholder="Favorite Food?">
+	 	    </div>
+			
+			<input type="submit" class="btn btn-primary btn-block" value="Submit">
+		</form>
+
+		<br>
+	</div>
+</form>
+
+	<!-- Because we now use partials for our header, we can't directly add Boostrap Classes to our Body tag.
+		 Below is a "work-around" to apply the Bootstrap classes when the page loads
+	 -->
+	<script type="text/javascript">
+        function addCSSToBody() {
+            document.body.classlist.add("center");
+            document.body.classlist.add("text-center");
+        }
+        window.onload = addCSSToBody;
+
+	</script>
+<% include ../partials/footer %>
