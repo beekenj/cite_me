@@ -583,7 +583,7 @@ function citeThis() {
 			//FORMAT THIS
 			var date = document.getElementById("pub_date").value;
 			if (date != ""){
-				inj +=  getDay(date) + " " + parseMonth(getMonth(date)) + " " + getYear(date) ", ";
+				inj +=  getDay(date) + " " + parseMonth(getMonth(date)) + " " + getYear(date) + ", ";
 			}
 			//URL + .
 			var url = document.getElementById("url").value;
@@ -687,7 +687,7 @@ function citeThis() {
 			// day + month + year + .
 			var date = document.getElementById("pub_date").value; //FORMAT THIS
 			if (date != ""){
-				inj +=  getDay(date) + " " + parseMonth(getMonth(date)) + " " + getYear(date) ". ";
+				inj +=  getDay(date) + " " + parseMonth(getMonth(date)) + " " + getYear(date) + ". ";
 			}
 			//website title or database title ITALICIZED
 			var wTit = document.getElementById("website_title").value;
@@ -702,7 +702,7 @@ function citeThis() {
 			// Date Month Year Accessed + .
 			var wdate = document.getElementById("date_accessed").value; //FORMAT THIS
 			if (wdate != ""){
-				inj +=  getDay(wdate) + " " + parseMonth(getMonth(wdate)) + " " + getYear(wdate) ". ";
+				inj +=  getDay(wdate) + " " + parseMonth(getMonth(wdate)) + " " + getYear(wdate) + ". ";
 			}
 		}
 		//Newspaper
@@ -722,7 +722,7 @@ function citeThis() {
 			//date month year published + :
 			var date = document.getElementById("pub_date").value; //FORMAT THIS
 			if (date != ""){
-				inj +=  getDay(date) + " " + parseMonth(getMonth(date)) + " " + getYear(date) ": ";
+				inj +=  getDay(date) + " " + parseMonth(getMonth(date)) + " " + getYear(date) + ": ";
 			}
 			//pages
 			var pgs = document.getElementById("pgs").value;
@@ -742,7 +742,7 @@ function citeThis() {
 			//date month year accessed + .
 			var wdate = document.getElementById("date_accessed").value; //FORMAT THIS
 			if (wdate != ""){
-				inj +=  getDay(wdate) + " " + parseMonth(getMonth(wdate)) + " " + getYear(wdate) ". ";
+				inj +=  getDay(wdate) + " " + parseMonth(getMonth(wdate)) + " " + getYear(wdate) + ". ";
 			}
 		}
 	}
@@ -801,7 +801,7 @@ function citeThis() {
 			//FORMAT THIS
 			var date = document.getElementById("pub_date").value;
 			if (date != ""){
-				inj +=  getDay(date) + " " + parseMonth(getMonth(date)) + " " + getYear(date) ". ";
+				inj +=  getDay(date) + " " + parseMonth(getMonth(date)) + " " + getYear(date) + ". ";
 			}
 			//URL + .
 			var url = document.getElementById("url").value;
@@ -873,7 +873,7 @@ function citeThis() {
 			// month + day + , + year + .
 			var date = document.getElementById("pub_date").value; //FORMAT THIS
 			if (date != ""){
-				inj +=  parseMonth(getMonth(date)) + " " +  getDay(date) + ", " + getYear(date) ". ";
+				inj +=  parseMonth(getMonth(date)) + " " +  getDay(date) + ", " + getYear(date) + ". ";
 			}
 			//website title or database title ITALICIZED
 			var wTit = document.getElementById("website_title").value;
@@ -886,7 +886,7 @@ function citeThis() {
 			//month + day + , + year + .
 			var wdate = document.getElementById("date_accessed").value; //FORMAT THIS
 			if (wdate != ""){
-				inj +=  parseMonth(getMonth(wdate)) + " " +  getDay(wdate) + ", " + getYear(wdate) ". ";
+				inj +=  parseMonth(getMonth(wdate)) + " " +  getDay(wdate) + ", " + getYear(wdate) + ". ";
 			}
 		}
 		//Newspaper
@@ -907,7 +907,7 @@ function citeThis() {
 			//date month year published + :
 			var date = document.getElementById("pub_date").value; //FORMAT THIS
 			if (date != ""){
-				inj +=  parseMonth(getMonth(date)) + " " +  getDay(date) + ", " + getYear(date) ". ";
+				inj +=  parseMonth(getMonth(date)) + " " +  getDay(date) + ", " + getYear(date) + ". ";
 			}
 			//url or database title ITALICIZED + .
 			var url = document.getElementById("url").value;
