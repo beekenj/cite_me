@@ -1022,6 +1022,560 @@ function createCitation(){
 	return inj;
 }
 
+function citeThis() {
+	var type = document.getElementById("doc_type").value;
+	var style = document.getElementById("doc_style").value;
+	var inj = "";
+	//MLA
+	if (style == "MLA"){
+		//Webpage
+		if (type == "Webpage"){
+			inj += authorInjMLA();
+			//" + article title + ." 
+			var tit = document.getElementById("article_title").value;
+			if (tit != ""){
+				inj += '"' + tit + '." ';
+			}
+			//website title ITALICIZED + ,
+			var webTit = document.getElementById("website_title").value;
+			if (webTit != ""){
+				inj += "<i>" + webTit + "</i>, ";
+			}
+			//publisher + ,
+			var pub = document.getElementById("pub").value;
+			if (pub != ""){
+				inj +=  pub + ", ";
+			}
+			// day month year of publication + ,
+			//FORMAT THIS
+			var date = document.getElementById("pub_date").value;
+			if (date != ""){
+				inj +=  getDay(date) + " " + parseMonth(getMonth(date)) + getYear(date) + ", ";
+			}
+			//URL + .
+			var url = document.getElementById("url").value;
+			if (url != ""){
+				inj +=  url + ".";
+			}	
+		}
+		//Book
+		if (type == "Book"){
+			//author last, first + .
+			inj += authorInjMLA();
+			//title ITALICIZED + .
+			var tit = document.getElementById("article_title").value;
+			if (tit != ""){
+				inj += "<i>" + tit + ". </i>";
+			}
+			//city of publication + :
+			var city = document.getElementById("cty").value;
+			if (city != ""){
+				inj +=  city + ": ";
+			}
+			//publisher + ,
+			var pub = document.getElementById("pub").value;
+			if (pub != ""){
+				inj +=  pub + ", ";
+			}
+			//year published + ,
+			var date = document.getElementById("pub_date").value;
+			if (date != ""){
+				inj +=  getYear(date) + ", ";
+			}
+			//"pp. " + page numbers + .
+			var pgs = document.getElementById("pgs").value;
+			if (pgs != ""){
+				inj += "pp. " + pgs + ". ";
+			}
+			// + "Print."
+			inj += "Print."
+		}
+		// Journal
+		else if (type === "Journal"){
+			//author last, first + .
+			inj += authorInjMLA();
+			//" + article title + ." 
+			var tit = document.getElementById("article_title").value;
+			if (tit != ""){
+				inj += '"' + tit + '." ';
+			}
+			//Journal title ITALICIZED
+			var jTit = document.getElementById("journal_name").value;
+			if (jTit != ""){
+				inj += "<i>" + jTit + "</i> ";
+			}
+			//volume + . 
+			var vol = document.getElementById("vol").value;
+			if (vol != ""){
+				inj += "vol. " + vol + ", ";
+			}
+			//issue
+			var issue = document.getElementById("iss").value;
+			if (issue != ""){
+				inj += "no. " + issue + ", ";
+			}
+			// day + , + month + year + , 
+			var date = document.getElementById("pub_date").value; //FORMAT THIS
+			if (date != ""){
+				inj += "(" + date + "): ";
+			}
+			// pp. + pages + .
+			var pgs = document.getElementById("pgs").value;
+			if (pgs != ""){
+				inj += "pp. " + pgs + ". ";
+			}
+			var db = document.getElementById("database_title").value;
+			if (db != ""){
+				inj += "<i>" + db + "</i>, ";
+			}
+			var doi = document.getElementById("doi").value;
+			var url = document.getElementById("url").value;
+			if (doi != ""){
+				inj += doi + ".";
+			} else if (url != ""){
+				inj += url + ".";
+			}
+		}
+		//Magazine
+		else if (type === "Magazine"){
+			//author last, first + .
+			inj += authorInjMLA();
+			// " + article title + ."
+			var tit = document.getElementById("article_title").value;
+			if (tit != ""){
+				inj += '"' + tit + '." ';
+			}
+			// magazine title ITALICIZED + .
+			var mTit = document.getElementById("magazine_title").value;
+			if (mTit != ""){
+				inj += "<i>" + mTit + "</i>. ";
+			}
+			// Date Month Year Published + .
+			// day + , + month + year + , 
+			var date = document.getElementById("pub_date").value; //FORMAT THIS
+			if (date != ""){
+				inj += date + ", ";
+			}
+			//website title or database title ITALICIZED
+			var wTit = document.getElementById("website_title").value;
+			var dTit = document.getElementById("database_title").value;
+			if (wTit != ""){
+				inj += "<i>" + wTit + "</i> ";
+			} else if (dTit != ""){
+				inj += "<i>" + dTit + "</i> ";
+			}
+			// + "Web."
+			inj += "Web. ";
+			// Date Month Year Accessed + .
+			var date = document.getElementById("date_accessed").value; //FORMAT THIS
+			if (date != ""){
+				inj += date + ". ";
+			}
+		}
+		//Newspaper
+		else if (type === "Newspaper"){
+			//author last, first + .
+			inj += authorInjMLA();
+			// " + article title + ."
+			var tit = document.getElementById("article_title").value;
+			if (tit != ""){
+				inj += '"' + tit + '." ';
+			}
+			//news paper title ITALICIZED +
+			var nTit = document.getElementById("newspaper_name").value;
+			if (nTit != ""){
+				inj += "<i>" + nTit + "</i> ";
+			}
+			//date month year published + :
+			var date = document.getElementById("pub_date").value; //FORMAT THIS
+			if (date != ""){
+				inj += date + ": ";
+			}
+			//pages
+			var pgs = document.getElementById("pgs").value;
+			if (pgs != ""){
+				inj += pgs + ". ";
+			}
+			//website or database title ITALICIZED + .
+			var wTit = document.getElementById("website_title").value;
+			var dTit = document.getElementById("database_title").value;
+			if (wTit != ""){
+				inj += "<i>" + wTit + "</i>. ";
+			} else if (dTit != ""){
+				inj += "<i>" + dTit + "</i>. ";
+			}
+			// Web.
+			inj += "Web. ";
+			//date month year accessed + .
+			var date = document.getElementById("date_accessed").value; //FORMAT THIS
+			if (date != ""){
+				inj += date + ". ";
+			}
+		}
+	}
+	//Chicago
+	else if (style === "Chicago") {
+		//Book
+		if (type === "Book"){
+			//author last, first + .
+			inj += authorInjChi();
+			//title ITALICIZED + .
+			var tit = document.getElementById("article_title").value;
+			if (tit != ""){
+				inj += "<i>" + tit + ". </i>";
+			}
+			//city of publication + :
+			var city = document.getElementById("cty").value;
+			if (city != ""){
+				inj +=  city + ": ";
+			}
+			//publisher + ,
+			var pub = document.getElementById("pub").value;
+			if (pub != ""){
+				inj +=  pub + ", ";
+			}
+			//year published + ,
+			var date = document.getElementById("pub_date").value;
+			if (date != ""){
+				inj +=  getYear(date) + ", ";
+			}
+			//"pp. " + page numbers + .
+			var pgs = document.getElementById("pgs").value;
+			if (pgs != ""){
+				inj += "pp. " + pgs + ". ";
+			}
+		}
+		//Webpage
+		else if (type === "Webpage"){
+			//author last, first + .
+			inj += authorInjChi();
+			//" + article title + ." 
+			var tit = document.getElementById("article_title").value;
+			if (tit != ""){
+				inj += '"' + tit + '." ';
+			}
+			//website title ITALICIZED + ,
+			var webTit = document.getElementById("website_title").value;
+			if (webTit != ""){
+				inj += "<i>" + webTit + "</i>, ";
+			}
+			//publisher + ,
+			var pub = document.getElementById("pub").value;
+			if (pub != ""){
+				inj +=  pub + ", ";
+			}
+			// day month year of publication + ,
+			//FORMAT THIS
+			var date = document.getElementById("pub_date").value;
+			if (date != ""){
+				inj +=  date + ", ";
+			}
+			//URL + .
+			var url = document.getElementById("url").value;
+			if (url != ""){
+				inj +=  url + ".";
+			}
+		}
+		//Journal
+		else if (type === "Journal"){
+			//author last, first + .
+			inj += authorInjChi();
+			//" + article title + ." 
+			var tit = document.getElementById("article_title").value;
+			if (tit != ""){
+				inj += '"' + tit + '." ';
+			}
+			//Journal title ITALICIZED
+			var jTit = document.getElementById("journal_name").value;
+			if (jTit != ""){
+				inj += "<i>" + jTit + "</i> ";
+			}
+			//volume + . 
+			var vol = document.getElementById("vol").value;
+			if (vol != ""){
+				inj += vol + ", ";
+			}
+			//issue
+			var issue = document.getElementById("iss").value;
+			if (issue != ""){
+				inj += "no. " + issue + ", ";
+			}
+			// day + , + month + year + , 
+			var date = document.getElementById("pub_date").value; //FORMAT THIS
+			if (date != ""){
+				inj += "(" + date + "): ";
+			}
+			// pp. + pages + .
+			var pgs = document.getElementById("pgs").value;
+			if (pgs != ""){
+				inj += pgs + ", ";
+			}
+			var db = document.getElementById("database_title").value; //ISSUES...
+			if (db != ""){
+				inj += db + ", ";
+			}
+			var doi = document.getElementById("doi").value;
+			var url = document.getElementById("url").value;
+			if (doi != ""){
+				inj += doi + ".";
+			} else if (url != ""){
+				inj += url + ".";
+			}
+		}
+		//Magazine
+		else if (type === "Magazine"){
+			//author last, first + .
+			inj += authorInjChi();
+			// " + article title + ."
+			var tit = document.getElementById("article_title").value;
+			if (tit != ""){
+				inj += '"' + tit + '." ';
+			}
+			// magazine title ITALICIZED + .
+			var mTit = document.getElementById("magazine_title").value;
+			if (mTit != ""){
+				inj += "<i>" + mTit + "</i>. ";
+			}
+			// Date Month Year Published + .
+			// day + , + month + year + , 
+			var date = document.getElementById("pub_date").value; //FORMAT THIS
+			if (date != ""){
+				inj += date + ", ";
+			}
+			//website title or database title ITALICIZED
+			var wTit = document.getElementById("website_title").value;
+			var dTit = document.getElementById("database_title").value;
+			if (wTit != ""){
+				inj += wTit;
+			} else if (dTit != ""){
+				inj += dTit;
+			}
+			//date month year accessed + .
+			var date = document.getElementById("date_accessed").value; //FORMAT THIS
+			if (date != ""){
+				inj += "(accessed " + date + "). ";
+			}
+		}
+		//Newspaper
+		else if (type === "Newspaper"){
+			//author last, first + .
+			inj += authorInjChi();
+			// YEAR!
+			// " + article title + ."
+			var tit = document.getElementById("article_title").value;
+			if (tit != ""){
+				inj += '"' + tit + '." ';
+			}
+			//news paper title ITALICIZED +
+			var nTit = document.getElementById("newspaper_name").value;
+			if (nTit != ""){
+				inj += "<i>" + nTit + "</i>, ";
+			}
+			//date month year published + :
+			var date = document.getElementById("pub_date").value; //FORMAT THIS
+			if (date != ""){
+				inj += date + ", ";
+			}
+			//url or database title ITALICIZED + .
+			var url = document.getElementById("url").value;
+			var dTit = document.getElementById("database_title").value;
+			if (url != ""){
+				inj += url + ". ";
+			} else if (dTit != ""){
+				inj += dTit + ". ";
+			}
+		}
+	}
+	//APA
+	else if (style === "APA"){
+		//Book
+		if (type === "Book"){
+			//author last, first + .
+			inj += authorInjChi();
+			// ( + year published + )
+			var date = document.getElementById("pub_date").value; //FORMAT THIS
+			var yr = getYear(date);
+			if (yr != ""){
+				inj += "(" + yr + ") ";
+			}
+			//book title ITALICIZED + .
+			var tit = document.getElementById("article_title").value;
+			if (tit != ""){
+				inj += "<i>" + tit + "</i>. ";
+			}
+			//city + ,
+			var city = document.getElementById("cty").value;
+			if (city != ""){
+				inj +=  city + ", ";
+			}
+			//state + :
+			var state = document.getElementById("stt").value;
+			if (state != ""){
+				inj += state + ": ";
+			}
+			//Publisher + .
+			var pub = document.getElementById("pub").value;
+			if (pub != ""){
+				inj +=  pub + ".";
+			}
+
+		}
+		//Webpage
+		else if (type === "Webpage"){
+			//author last, first + .
+			inj += authorInjChi();
+			// ( + year + , + month date Published + ). 
+			var date = document.getElementById("pub_date").value; //FORMAT THIS
+			if (date != ""){
+				var month = parseMonth(getMonth(date));
+				var yr = getYear(date);
+				var day = getDay(date);
+				inj += "(";
+				if (yr != ""){
+					inj += yr + ", ";
+				}
+				if (month != ""){
+					inj += month + " ";
+				}
+				if (day != ""){
+					inj += day;
+				}
+				inj += "). ";
+			}
+			//article title ITALICIZED + .
+			var tit = document.getElementById("article_title").value;
+			if (tit != ""){
+				inj += "<i>" + tit + "</i>. ";
+			}
+			//Retrieved from URL
+			var url = document.getElementById("url").value;
+			if (url != ""){
+				inj += "Retrieved from " + url;
+			}
+		}
+		//Journal
+		else if (type === "Journal"){
+			//author last, first + .
+			inj += authorInjChi();
+			// ( + year published + ).
+			var date = document.getElementById("pub_date").value; //FORMAT THIS
+			if (date != ""){
+				var yr = date.getYear();
+				if (yr != ""){
+					inj += "(" + yr + "). "
+				}
+			}
+			// article title + .
+			var tit = document.getElementById("article_title").value;
+			if (tit != ""){
+				inj += tit + ". ";
+			} 
+			//journal name ITALICIZED + ,
+			var jTit = document.getElementById("journal_name").value;
+			if (jTit != ""){
+				inj += "<i>" + jTit + "</i>, ";
+			}
+			//Volume ITALICIZED
+			var vol = document.getElementById("vol").value;
+			if (vol != ""){
+				inj += "<i>" + vol + "</i>";
+			}
+			// ( + issue + ),
+			var issue = document.getElementById("iss").value;
+			if (issue != ""){
+				inj += "(" + issue + "), ";
+			}
+			//pp. + Pages + .
+			var pgs = document.getElementById("pgs").value;
+			if (pgs != ""){
+				inj += "pp. " + pgs + ". ";
+			}
+			//doi or retrieved from URL
+			var doi = document.getElementById("doi").value;
+			var url = document.getElementById("url").value;
+			if (doi != ""){
+				inj += doi + ".";
+			} else if (url != ""){
+				inj += "Retrieved from " + url;
+			}
+		}
+		//Magazine
+		else if (type === "Magazine"){
+			//author last, first + .
+			inj += authorInjChi();
+			// ( + year, month published) + ).
+			var date = document.getElementById("pub_date").value; //FORMAT THIS
+			if (date != ""){
+				inj += "(";
+				var yr = date.getYear();
+				if (yr != ""){
+					inj += yr + ", ";
+				}
+				var month = month(date.getMonth());
+				if (month != ""){
+					inj += month;
+				}
+				inj += "). ";
+			}
+			// article title + .
+			var tit = document.getElementById("article_title").value;
+			if (tit != ""){
+				inj += tit + ". ";
+			}
+			//magazine title ITALICIZED + .
+			var mTit = document.getElementById("magazine_title").value;
+			if (mTit != ""){
+				inj += "<i>" + mTit + "</i>. ";
+			}
+			//Retrieved from URL
+			var url = document.getElementById("url").value;
+			if (url != ""){
+				inj += "Retrieved from " + url;
+			}
+		}
+		//Newspaper
+		else if (type === "Newspaper"){
+			//author last, first + .
+			inj += authorInjChi();
+			// ( + year, month published) + ).
+			var date = document.getElementById("pub_date").value; //FORMAT THIS
+			if (date != ""){
+				inj += "(";
+				var yr = date.getYear();
+				if (yr != ""){
+					inj += yr + ", ";
+				}
+				var month = month(date.getMonth());
+				if (month != ""){
+					inj += month;
+				}
+				inj += "). ";
+			}
+			// article title + .
+			var tit = document.getElementById("article_title").value;
+			if (tit != ""){
+				inj += tit + ". ";
+			}
+			//magazine title ITALICIZED + .
+			var nTit = document.getElementById("newspaper_name").value;
+			if (nTit != ""){
+				inj += "<i>" + nTit + "</i>, ";
+			}
+			//pp. + Pages + .
+			var pgs = document.getElementById("pgs").value;
+			if (pgs != ""){
+				inj += "pp. " + pgs + ". ";
+			}
+			//Retrieved from URL
+			var url = document.getElementById("url").value;
+			if (url != ""){
+				inj += "Retrieved from " + url;
+			}
+		}
+	}
+	document.getElementById("printCite").innerHTML = inj;
+}
+
 function submitForm()
 {
    document.getElementById("citeString").value = createCitation();
