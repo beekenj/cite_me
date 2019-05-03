@@ -1023,8 +1023,8 @@ function createCitation(){
 }
 
 function citeThis() {
-	var type = document.getElementById("doc_type").value;
-	var style = document.getElementById("doc_style").value;
+	var type = document.getElementById("type").value;
+	var style = document.getElementById("style").value;
 	var inj = "";
 	//MLA
 	if (style == "MLA"){
