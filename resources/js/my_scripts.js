@@ -1030,3 +1030,5 @@ function submitForm()
 document.getElementById("submitCite").onclick = submitForm;
 document.body.onload = changeForm;
 
+document.getElementById("qcite").onclick = citeThis;
+
