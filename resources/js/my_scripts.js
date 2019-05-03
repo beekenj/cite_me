@@ -1063,7 +1063,7 @@ function citeThis() {
 			//author last, first + .
 			inj += authorInjMLA();
 			//title ITALICIZED + .
-			var tit = document.getElementById("article_title").value;
+			var tit = document.getElementById("book_title").value;
 			if (tit != ""){
 				inj += "<i>" + tit + ". </i>";
 			}
