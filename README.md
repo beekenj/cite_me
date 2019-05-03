@@ -10,6 +10,8 @@ There is a user registration and log-in component.
 
 To launch the application: https://citeme.herokuapp.com/
 
+We used NodeExpress to implement our code, and the repository is orginazed as NodeExpress built it.  
+
 The user can also use a chrome extension for quick citations, and copy & paste them directly into their paper.
 
 Chrome extension installation instructions:
