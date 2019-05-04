@@ -1,10 +1,15 @@
 {
-  "name": "citeme",
-  "version": "1.0.0",
-  "description": "citing project",
-  "main": "citeme",
+ "name": "node-ejs",
+ "main": "server.js",
   "dependencies": {
     "request": "^2.88.0"
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.4",
+    "ejs": "^2.5.5",
+    "ejs-lint": "^0.3.0",
+    "express": "^4.6.1",
+    "express-session": "^1.16.1",
+    "pg-promise": "^8.5.1"
   },
   "devDependencies": {},
   "scripts": {
