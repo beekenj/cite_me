@@ -1,13 +1,26 @@
 {
-    "name": "node-ejs",
-    "main": "server.js",
-    "dependencies": {
-        "connect-flash": "^0.1.1",
-        "cookie-parser": "^1.4.4",
-        "ejs": "^2.5.5",
-        "ejs-lint": "^0.3.0",
-        "express": "^4.6.1",
-        "express-session": "^1.16.1",
-        "pg-promise": "^8.5.1"
-    }
+  "name": "citeme",
+  "version": "1.0.0",
+  "description": "citing project",
+  "main": "citeme",
+  "dependencies": {
+    "request": "^2.88.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JRiley4141/Team_Project_Code-Components.git"
+  },
+  "keywords": [
+    "citeme"
+  ],
+  "author": "JRiley4141",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JRiley4141/Team_Project_Code-Components/issues"
+  },
+  "homepage": "https://github.com/JRiley4141/Team_Project_Code-Components#readme"
 }
