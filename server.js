@@ -21,7 +21,7 @@ const util = require('util')
 var app = express();
 
 app.use(cookieParser('secret'));
-app.use(session({cookie: { maxAge: 60000 }}));
+app.use(session({cookie: { maxAge: 365 * 24 * 60 * 60 * 1000}}));
 app.use(flash()); // setup the flash for flashing info/errors to client
 app.use(bodyParser.json());              // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
@@ -76,13 +76,7 @@ app.use(express.static(__dirname + '/'));//This line is necessary for us to use 
     Creates a user instance.       
   Registration Page: 
       /registration - post request
-        User Registration Form, updates userreg table in postgres
-  
-Citation Form:
-      /citationForm - post request
-      1. User fills in formfields
-      2. Uploads to database
-      3. Creates a new citation in the database
+        User Registration Form, updates userreg table in postgres 
   Home Page:
   		/home - get request 
           Should have a table of all of the users citations
@@ -195,45 +189,6 @@ app.get('/citationForm', function(req, res) {
   });
 });
 
-// Submit Citation Information
-app.post('/citationForm', function(req, res) {
-  console.log(req.body);
-  console.log(util.inspect(req.session.user));
-  var citeString = req.body.citeString;
-  console.log("citeString = " + citeString);
-  
-  if (citeString == '') {
-    res.status(500).send('Failed to provide a valid citation.');
-    res.end();
-    return;
-  }
-  
-  //Insert Citations into Database
-  var cit_insert_statement = "INSERT INTO usercitations(user_id, html_string) VALUES('" + req.session.user.user_id + "','" + citeString + "');"
-  console.log("query: %s", cit_insert_statement);
-
-  db.task('write-everything', task => {
-      return task.batch([
-          task.any(cit_insert_statement)
-      ]);
-    })
-    .then(info => {
-        console.log("POST /citationForm\n%s", info);
-        res.render('pages/citationForm', {
-            my_title: "Citation Submission Success"
-        })
-    })
-    // Return error
-    .catch(err => {
-        // display error message in case an error
-        console.log("POST /citationForm\n%s", err);
-        req.flash('error', err);
-        res.render('pages/citationForm', {
-            my_title: 'Citation Submission Failure',
-        })
-    });
-});
-
 
 ///////////////////////////////////////////////HOMEPAGE///////////////////////////////////////
 
@@ -257,7 +212,3 @@ var listener = app.listen(process.env.PORT
 
 });
 
-
-////////////////////////////////////////////////CITATIONS STATION//////////////////////////////////
-
-//To Do Code for Users Citation Station
