@@ -160,7 +160,7 @@ app.post('/register', function(req, res) {
     })
     .then(info => {
       console.log("POST /register\n%s", info);
-      res.render('pages/home', {
+      res.render('pages/login', {
         my_title: "Registration Success"
       })
     })
