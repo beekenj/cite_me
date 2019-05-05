@@ -1573,7 +1573,7 @@ function citeThis() {
 			}
 		}
 	}
-	document.getElementById("printCite").innerHTML = inj;
+	document.getElementById("printCite").innerHTML = inj + "<br>";
 }
 
 function submitForm()
