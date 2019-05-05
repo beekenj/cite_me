@@ -18,3 +18,4 @@ First you must download the /ext directory from the repo. Now, open the chrome w
 
 To run the test
 Run the SpecRunner2.html
+Testing also done through the Heroku Pipeline
