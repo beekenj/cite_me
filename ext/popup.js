@@ -1,4 +1,8 @@
 // popup scripts
+	// Name: Panther Epidemic
+	// Date: 5/5/2019
+	// Class: Software Dev
+	// Author: Jack Beeken
 
 // Access background.js global scope
 let bgpage = chrome.extension.getBackgroundPage();

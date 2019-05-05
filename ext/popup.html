@@ -1,6 +1,21 @@
-<!-- Jack Beeken -->
+<!-- 
+	Name: Panther Epidemic
+	Date: 5/5/2019
+	Class: Software Dev
+	Author: Jack Beeken 
+-->
 <!DOCTYPE html>
 <html>
+	<style>
+		.well {
+			border-style:inset;
+			padding-top: 10px;
+	  		padding-right: 8px;
+	  		padding-bottom: 10px;
+	  		padding-left: 8px;
+	  		word-wrap: break-word;
+		}
+	</style>
 	<head>
 		<title>Cite Me! Popup</title>
 		<!-- Latest compiled and minified CSS -->
@@ -188,16 +203,16 @@
 					<input id="load" type="submit" value="Load Citation" class="btn btn-primary btn-sm">
 				</td>
 				<td align="right">
-					<input id="qcite" type="submit" value="Quick Cite" class="btn btn-primary btn-sm">				
+					<input id="qcite" type="submit" value="Quick Cite" class="btn btn-success btn-sm">				
 					<!-- Submit button -->
-					<input id="submit" type="submit" value="Cite Me!" class="btn btn-success btn-sm">
+					<!-- <input id="submit" type="submit" value="Cite Me!" class="btn btn-success btn-sm"> -->
 				</td>
 			</tr>
 			</table>
+			<br>
+		<div id="printCite" class="well"><br></div>
 		</div>
 		<br>
-		<div id="printCite">
-		</div>
 	</body>
 	<script type="text/javascript" src="./popup.js"></script>
 </html>
