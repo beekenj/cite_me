@@ -15,7 +15,7 @@ The user can also use a chrome extension for quick citations, and copy & paste t
 
 Chrome extension installation instructions:
 First you must download the /ext directory from the repo. Now, open the chrome web browser. Type chrome://extenstions into the address bar. In the upper right hand corner, click "Developer mode". Then, in the upper left hand corner click "Load unpacked". Navigate to the /ext directory, and click open. The extension should now be installed. 
-      Once you download the extension, you can update fields by right clicking
+      Once you download the extension, you can update fields on the webpage by highlighting the text you want, like the author, and left click to navigate down to the citeMe extension. Select which field you wish to update, and that will update the form.
 
 To run the test
 Run the SpecRunner2.html
